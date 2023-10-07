@@ -23,11 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -132,212 +128,198 @@ public class ParserController {
 		}
 	}
 
-	public Task<Boolean> procesarDirectorio() {
-		return new Task<Boolean>() {
-			@SuppressWarnings("finally")
-			@Override
-			protected Boolean call() throws Exception {
+	public Boolean procesarDirectorio() {
+		// Collecci�n que registra las entries que ya han sido procesadas
+		HashSet<String> entriesProcesadas = new HashSet<String>();
+		HashMap<String, GregorianCalendar> entriesDeleted = new HashMap<String, GregorianCalendar>();
+		int numeroEntries = 0;
+		int numeroFicherosProcesados = 0;
 
-				// Collecci�n que registra las entries que ya han sido procesadas
-				HashSet<String> entriesProcesadas = new HashSet<String>();
-				HashMap<String, GregorianCalendar> entriesDeleted = new HashMap<String, GregorianCalendar>();
-				int numeroEntries = 0;
-				int numeroFicherosProcesados = 0;
+		FeedType res = null;
+		FileOutputStream output_file = null;
+		InputStreamReader inStream = null;
 
-				FeedType res = null;
-				FileOutputStream output_file = null;
-				InputStreamReader inStream = null;
-
-				seleccionLicitacionGenerales = new ArrayList<DatosLicitacionGenerales>();
-				seleccionLicitacionResultados = new ArrayList<DatosResultados>();
-				seleccionEncargosMediosPropios = new ArrayList<DatosEMP>();
-				seleccionConsultasPreliminares = new ArrayList<DatosCPM>();
+		seleccionLicitacionGenerales = new ArrayList<DatosLicitacionGenerales>();
+		seleccionLicitacionResultados = new ArrayList<DatosResultados>();
+		seleccionEncargosMediosPropios = new ArrayList<DatosEMP>();
+		seleccionConsultasPreliminares = new ArrayList<DatosCPM>();
 
 
-				try {
+		try {
 
- 					updateProgress(0, 1);
+			//Se crea el Stream de salida en el path indicado
+			output_file = new FileOutputStream(new File(textFieldOutputFile));
 
-					//Se crea el Stream de salida en el path indicado
-					output_file = new FileOutputStream(new File(textFieldOutputFile));
+			logger.debug("Se realiza la revisi�n de los datos seleccionados");
 
-					logger.debug("Se realiza la revisi�n de los datos seleccionados");
-					recogerDatosSeleccionados();
-
-					// Create the JAXBContext
-					JAXBContext jc = JAXBContext.newInstance(
-							"org.w3._2005.atom:org.dgpe.codice.common.caclib:org.dgpe.codice.common.cbclib:ext.place.codice.common.caclib:ext.place.codice.common.cbclib:org.purl.atompub.tombstones._1");
-					atomUnMarshaller = jc.createUnmarshaller();
+			// Create the JAXBContext
+			JAXBContext jc = JAXBContext.newInstance(
+					"org.w3._2005.atom:org.dgpe.codice.common.caclib:org.dgpe.codice.common.cbclib:ext.place.codice.common.caclib:ext.place.codice.common.cbclib:org.purl.atompub.tombstones._1");
+			atomUnMarshaller = jc.createUnmarshaller();
 
 
-					//Se crean las hojas necesarias
-					logger.debug("Creaci�n de hojas de c�lculo");
-					SpreeadSheetManager spreeadSheetManager = new SpreeadSheetManager(isDosTablas, seleccionEncargosMediosPropios.size()>0, seleccionConsultasPreliminares.size()>0);
+			//Se crean las hojas necesarias
+			logger.debug("Creaci�n de hojas de c�lculo");
+			SpreeadSheetManager spreeadSheetManager = new SpreeadSheetManager(isDosTablas, seleccionEncargosMediosPropios.size()>0, seleccionConsultasPreliminares.size()>0);
 
-					logger.debug("Se comienzan a a�adir los t�tulos");
-					insertarTitulos(spreeadSheetManager);
-					//Se cambian los tama�os de las columnas
-					spreeadSheetManager.updateColumnsSize();
-					logger.info("T�tulos a�adidos y tama�os de columnas ajustados");
+			logger.debug("Se comienzan a a�adir los t�tulos");
+			insertarTitulos(spreeadSheetManager);
+			//Se cambian los tama�os de las columnas
+			spreeadSheetManager.updateColumnsSize();
+			logger.info("T�tulos a�adidos y tama�os de columnas ajustados");
 
-					// Se comprueba que exista el ficheroRISP a procesar
-					File ficheroRISP = new File(textFieldDirOrigen);
-					String directorioPath = ficheroRISP.getParent();
-					boolean existeFicheroRisp = ficheroRISP.exists() && ficheroRISP.isFile();
+			// Se comprueba que exista el ficheroRISP a procesar
+			File ficheroRISP = new File(textFieldDirOrigen);
+			String directorioPath = ficheroRISP.getParent();
+			boolean existeFicheroRisp = ficheroRISP.exists() && ficheroRISP.isFile();
 
-					if (existeFicheroRisp) {
-						logger.info("Directorio originen de ficheros RISP-PLACSP: " + directorioPath);
-						logger.info("Fichero r�iz: " + ficheroRISP.getName());
-					} else {
-						logger.error("No se puede acceder al fichero " + textFieldDirOrigen);
-					}
-
-					File[] lista_ficherosRISP = ficheroRISP.getParentFile().listFiles();
-					logger.info("N�mero previsto de ficheros a procesar: " + lista_ficherosRISP.length);
-
-					// calculo de cada salto
-					double saltoBar = 1.00 / lista_ficherosRISP.length;
-					double saltoAcumuladoBar = 0;
-
-					while (existeFicheroRisp) {
-						logger.info("Procesando fichero: " + ficheroRISP.getName());
-
-						saltoAcumuladoBar += saltoBar;
-						updateProgress(saltoAcumuladoBar, 1);
-						logger.info("Ratio de archivos procesados: " + saltoAcumuladoBar * 100.00 + " %");
-
-						res = null;
-						inStream = new InputStreamReader(new FileInputStream(ficheroRISP), StandardCharsets.UTF_8);
-						res = ((JAXBElement<FeedType>) atomUnMarshaller.unmarshal(inStream)).getValue();
-
-						// Se a�aden las licitaciones que han dejado de ser v�lidas
-						if (res.getAny() != null) {
-							for (int indice = 0; indice < res.getAny().size(); indice++) {
-								DeletedEntryType deletedEntry = ((JAXBElement<DeletedEntryType>) res.getAny().get(indice)).getValue();
-								if (!entriesDeleted.containsKey(deletedEntry.getRef())) {
-									entriesDeleted.put(deletedEntry.getRef(), deletedEntry.getWhen().toGregorianCalendar());
-								}
-							}
-						}
-
-						// Se recorren las licitaciones (elementos entry)
-						numeroEntries += res.getEntry().size();
-						for (EntryType entry : res.getEntry()) {
-							// Se comprueba si ya se ha procesado una entry con el mismo identoficador y que es m�s reciente
-							if (!entriesProcesadas.contains(entry.getId().getValue())) {
-								// Se comprueba si se encuentra en la la lista de licitaciones Deleted
-								GregorianCalendar fechaDeleted = null;
-								if (entriesDeleted.containsKey(entry.getId().getValue())) {
-									fechaDeleted = entriesDeleted.get(entry.getId().getValue());
-								}
-
-								//Se compruebe si se trata de una licitaci�n, un encargo a medio propio o un una consulta preliminar de mercado
-								boolean isCPM = false;
-								if (((JAXBElement<?>)entry.getAny().get(0)).getValue() instanceof PreliminaryMarketConsultationStatusType) {
-									isCPM = true;
-								}
-								
-								if (isCPM) {
-									//Se trata de una consulta preliminar de mercado, solo cuando se han seleccionado campos
-									if(seleccionConsultasPreliminares.size()>0) {
-										procesarCPM(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.CPM), fechaDeleted, seleccionConsultasPreliminares);
-									}
-								}else {
-									//Se trata de una licitaci�n o de un encargo a medio propio
-									//Si existe el resultCode con valor 11, entonces es EMP. Si no, es licitaci�n
-									boolean isEMP = false;
-									try {
-										//Se comprueba si es un EMP
-										isEMP = (((JAXBElement<ContractFolderStatusType>) entry.getAny().get(0)).getValue().getTenderResult().get(0).getResultCode().getValue().compareTo("11") == 0);
-									}
-									catch(Exception e){
-										isEMP = false;
-									}
-
-									if (isEMP) {
-										//Se trata de un EMP
-										//y se han seleccionado campos
-										if(seleccionEncargosMediosPropios.size()>0) {
-											procesarEncargo(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.EMP), fechaDeleted, seleccionEncargosMediosPropios);	
-										}
-									} else {
-										//Es una licitaci�n
-										if (isDosTablas) {
-											//La salida es en dos tablas
-											procesarEntry(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.LICITACIONES), fechaDeleted, seleccionLicitacionGenerales);
-											procesarEntryResultados(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.RESULTADOS), fechaDeleted, seleccionLicitacionResultados);
-										}else {
-											//La salida es en una tabla
-											procesarEntryCompleta(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.LICITACIONES), fechaDeleted, seleccionLicitacionGenerales, seleccionLicitacionResultados);
-										}
-									}
-
-								}
-
-								entriesProcesadas.add(entry.getId().getValue());
-							}
-						}
-						// se comprueba cu�l es el siguiente fichero a procesar
-						for (LinkType linkType : res.getLink()) {
-							existeFicheroRisp = false;
-							if (linkType.getRel().toLowerCase().compareTo("next") == 0) {
-								String[] tempArray = linkType.getHref().split("/");
-								String nombreSiguienteRIPS = tempArray[tempArray.length - 1];
-								ficheroRISP = new File(directorioPath + "/" + nombreSiguienteRIPS);
-								existeFicheroRisp = ficheroRISP.exists() && ficheroRISP.isFile();
-							}
-						}
-						inStream.close();
-						numeroFicherosProcesados++;
-						updateProgress(1, 1);
-					}
-
-					logger.info("Creando el fichero " + textFieldOutputFile);
-					logger.info("N�mero de ficheros procesados " + numeroFicherosProcesados);
-					logger.info("N�mero de elementos entry existentes: " + numeroEntries);
-					logger.info("Licitaciones insertadas en el fichero: " + entriesProcesadas.size());
-
-					spreeadSheetManager.insertarFiltro(seleccionLicitacionGenerales.size(), seleccionLicitacionResultados.size(), seleccionEncargosMediosPropios.size(), seleccionConsultasPreliminares.size());
-
-					
-					
-					logger.info("Comienzo de escritura del fichero de salida");
-					spreeadSheetManager.getWorkbook().write(output_file); // write excel document to output stream
-					output_file.close(); // close the file
-					spreeadSheetManager.getWorkbook().close();
-					// para mostrar algunos resultados en la interfaz de usuario
-					n_licitaciones = (Integer.toString(entriesProcesadas.size()));
-					n_ficheros = (Integer.toString(numeroFicherosProcesados));
-
-					
-					
-					logger.info("Fin del proceso de generaci�n del fichero");
-
-
-
-				} catch (JAXBException e) {// ventanas de error para las excepciones contempladas
-					e.printStackTrace();
-					String auxError = "Error al procesar el fichero ATOM. No se puede continuar con el proceso.";
-					logger.error(auxError);
-					logger.debug(e.getStackTrace());
-				} catch (FileNotFoundException e) {
-					String auxError = "Error al generar el fichero de salida. No se pudo crear un fichero en la ruta indicada o no pudo ser abierto por alguna otra raz�n.";
-					logger.error(auxError);
-					logger.debug(e.toString());
-				} catch (Exception e) {
-					// error inesperado
-					String auxError = "Error inesperado, revise la configuraci�n y el log...";
-					e.printStackTrace();
-					logger.error(auxError);
-					logger.debug(e.getStackTrace());
-					logger.debug(e.getMessage());
-				} finally {
-					return true;
-				}
+			if (existeFicheroRisp) {
+				logger.info("Directorio originen de ficheros RISP-PLACSP: " + directorioPath);
+				logger.info("Fichero r�iz: " + ficheroRISP.getName());
+			} else {
+				logger.error("No se puede acceder al fichero " + textFieldDirOrigen);
 			}
 
+			File[] lista_ficherosRISP = ficheroRISP.getParentFile().listFiles();
+			logger.info("N�mero previsto de ficheros a procesar: " + lista_ficherosRISP.length);
 
-		};
+			// calculo de cada salto
+			double saltoBar = 1.00 / lista_ficherosRISP.length;
+			double saltoAcumuladoBar = 0;
+
+			while (existeFicheroRisp) {
+				logger.info("Procesando fichero: " + ficheroRISP.getName());
+
+				saltoAcumuladoBar += saltoBar;
+				logger.info("Ratio de archivos procesados: " + saltoAcumuladoBar * 100.00 + " %");
+
+				res = null;
+				inStream = new InputStreamReader(new FileInputStream(ficheroRISP), StandardCharsets.UTF_8);
+				res = ((JAXBElement<FeedType>) atomUnMarshaller.unmarshal(inStream)).getValue();
+
+				// Se a�aden las licitaciones que han dejado de ser v�lidas
+				if (res.getAny() != null) {
+					for (int indice = 0; indice < res.getAny().size(); indice++) {
+						DeletedEntryType deletedEntry = ((JAXBElement<DeletedEntryType>) res.getAny().get(indice)).getValue();
+						if (!entriesDeleted.containsKey(deletedEntry.getRef())) {
+							entriesDeleted.put(deletedEntry.getRef(), deletedEntry.getWhen().toGregorianCalendar());
+						}
+					}
+				}
+
+				// Se recorren las licitaciones (elementos entry)
+				numeroEntries += res.getEntry().size();
+				for (EntryType entry : res.getEntry()) {
+					// Se comprueba si ya se ha procesado una entry con el mismo identoficador y que es m�s reciente
+					if (!entriesProcesadas.contains(entry.getId().getValue())) {
+						// Se comprueba si se encuentra en la la lista de licitaciones Deleted
+						GregorianCalendar fechaDeleted = null;
+						if (entriesDeleted.containsKey(entry.getId().getValue())) {
+							fechaDeleted = entriesDeleted.get(entry.getId().getValue());
+						}
+
+						//Se compruebe si se trata de una licitaci�n, un encargo a medio propio o un una consulta preliminar de mercado
+						boolean isCPM = false;
+						if (((JAXBElement<?>)entry.getAny().get(0)).getValue() instanceof PreliminaryMarketConsultationStatusType) {
+							isCPM = true;
+						}
+
+						if (isCPM) {
+							//Se trata de una consulta preliminar de mercado, solo cuando se han seleccionado campos
+							if(seleccionConsultasPreliminares.size()>0) {
+								procesarCPM(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.CPM), fechaDeleted, seleccionConsultasPreliminares);
+							}
+						}else {
+							//Se trata de una licitaci�n o de un encargo a medio propio
+							//Si existe el resultCode con valor 11, entonces es EMP. Si no, es licitaci�n
+							boolean isEMP = false;
+							try {
+								//Se comprueba si es un EMP
+								isEMP = (((JAXBElement<ContractFolderStatusType>) entry.getAny().get(0)).getValue().getTenderResult().get(0).getResultCode().getValue().compareTo("11") == 0);
+							}
+							catch(Exception e){
+								isEMP = false;
+							}
+
+							if (isEMP) {
+								//Se trata de un EMP
+								//y se han seleccionado campos
+								if(seleccionEncargosMediosPropios.size()>0) {
+									procesarEncargo(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.EMP), fechaDeleted, seleccionEncargosMediosPropios);
+								}
+							} else {
+								//Es una licitaci�n
+								if (isDosTablas) {
+									//La salida es en dos tablas
+									procesarEntry(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.LICITACIONES), fechaDeleted, seleccionLicitacionGenerales);
+									procesarEntryResultados(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.RESULTADOS), fechaDeleted, seleccionLicitacionResultados);
+								}else {
+									//La salida es en una tabla
+									procesarEntryCompleta(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.LICITACIONES), fechaDeleted, seleccionLicitacionGenerales, seleccionLicitacionResultados);
+								}
+							}
+
+						}
+
+						entriesProcesadas.add(entry.getId().getValue());
+					}
+				}
+				// se comprueba cu�l es el siguiente fichero a procesar
+				for (LinkType linkType : res.getLink()) {
+					existeFicheroRisp = false;
+					if (linkType.getRel().toLowerCase().compareTo("next") == 0) {
+						String[] tempArray = linkType.getHref().split("/");
+						String nombreSiguienteRIPS = tempArray[tempArray.length - 1];
+						ficheroRISP = new File(directorioPath + "/" + nombreSiguienteRIPS);
+						existeFicheroRisp = ficheroRISP.exists() && ficheroRISP.isFile();
+					}
+				}
+				inStream.close();
+				numeroFicherosProcesados++;
+			}
+
+			logger.info("Creando el fichero " + textFieldOutputFile);
+			logger.info("N�mero de ficheros procesados " + numeroFicherosProcesados);
+			logger.info("N�mero de elementos entry existentes: " + numeroEntries);
+			logger.info("Licitaciones insertadas en el fichero: " + entriesProcesadas.size());
+
+			spreeadSheetManager.insertarFiltro(seleccionLicitacionGenerales.size(), seleccionLicitacionResultados.size(), seleccionEncargosMediosPropios.size(), seleccionConsultasPreliminares.size());
+
+
+
+			logger.info("Comienzo de escritura del fichero de salida");
+			spreeadSheetManager.getWorkbook().write(output_file); // write excel document to output stream
+			output_file.close(); // close the file
+			spreeadSheetManager.getWorkbook().close();
+			// para mostrar algunos resultados en la interfaz de usuario
+			n_licitaciones = (Integer.toString(entriesProcesadas.size()));
+			n_ficheros = (Integer.toString(numeroFicherosProcesados));
+
+
+
+			logger.info("Fin del proceso de generaci�n del fichero");
+
+
+
+		} catch (JAXBException e) {// ventanas de error para las excepciones contempladas
+			e.printStackTrace();
+			String auxError = "Error al procesar el fichero ATOM. No se puede continuar con el proceso.";
+			logger.error(auxError);
+			logger.debug(e.getStackTrace());
+		} catch (FileNotFoundException e) {
+			String auxError = "Error al generar el fichero de salida. No se pudo crear un fichero en la ruta indicada o no pudo ser abierto por alguna otra raz�n.";
+			logger.error(auxError);
+			logger.debug(e.toString());
+		} catch (Exception e) {
+			// error inesperado
+			String auxError = "Error inesperado, revise la configuraci�n y el log...";
+			e.printStackTrace();
+			logger.error(auxError);
+			logger.debug(e.getStackTrace());
+			logger.debug(e.getMessage());
+		} finally {
+			return true;
+		}
 	}
 
 
@@ -519,48 +501,22 @@ public class ParserController {
 		HashMap<String, String> seleccionadosArbol;
 		CheckBoxTreeItem<String> nodo ;
 
-		//Datos Generales de la licitaci�n. Se recorre los datos posibles buscando los selecionados	
-		seleccionadosArbol = new HashMap<String, String>();
-		nodo = (CheckBoxTreeItem<String>) rootItem.getChildren().get(0).getChildren().get(0);
-		seleccionadosArbol = findCheckedBoxes(nodo);
 
-		for (DatosLicitacionGenerales datoLicitacionGeneral :  DatosLicitacionGenerales.values()) {
-			if (seleccionadosArbol.containsKey(datoLicitacionGeneral.getTiulo())) {
-				seleccionLicitacionGenerales.add(datoLicitacionGeneral);
-			}
-		}
+		DatosLicitacionGenerales.values();
+		DatosResultados.values();
+		DatosEMP.values();
+		DatosCPM.values();
+
+		Collections.addAll(seleccionLicitacionGenerales, DatosLicitacionGenerales.values());
 
 		//Resultados de la licitaci�n. Se recorre los datos posibles buscando los selecionados
-		seleccionadosArbol = new HashMap<String, String>();
-		nodo = (CheckBoxTreeItem<String>) rootItem.getChildren().get(0).getChildren().get(1);
-		seleccionadosArbol = findCheckedBoxes(nodo);
-		for (DatosResultados datosResultados :  DatosResultados.values()) {
-			if (seleccionadosArbol.containsKey(datosResultados.getTiulo())) {
-				seleccionLicitacionResultados.add(datosResultados);
-			}
-		}
+		Collections.addAll(seleccionLicitacionResultados, DatosResultados.values());
 
-
-		//Encargos a medios propios. Se recorre los datos posibles buscando los selecionados	
-		seleccionadosArbol = new HashMap<String, String>();
-		nodo = (CheckBoxTreeItem<String>) rootItem.getChildren().get(1);
-		seleccionadosArbol = findCheckedBoxes(nodo);
-		for (DatosEMP datoEMP :  DatosEMP.values()) {
-			if (seleccionadosArbol.containsKey(datoEMP.getTiulo())) {
-				seleccionEncargosMediosPropios.add(datoEMP);
-			}
-		}
-
+		//Encargos a medios propios. Se recorre los datos posibles buscando los selecionados
+		Collections.addAll(seleccionEncargosMediosPropios, DatosEMP.values());
 
 		//Consultas preliminares. Se recorre los datos posibles buscando los selecionados
-		seleccionadosArbol = new HashMap<String, String>();
-		nodo = (CheckBoxTreeItem<String>) rootItem.getChildren().get(2);
-		seleccionadosArbol = findCheckedBoxes(nodo);
-		for (DatosCPM datoCPM :  DatosCPM.values()) {
-			if (seleccionadosArbol.containsKey(datoCPM.getTiulo())) {
-				seleccionConsultasPreliminares.add(datoCPM);
-			}
-		}
+		Collections.addAll(seleccionConsultasPreliminares, DatosCPM.values());
 
 		if (logger.isDebugEnabled()) {
 			//Se imprimen los datos seleccionados
@@ -832,17 +788,10 @@ public class ParserController {
 				cell.setCellStyle(SpreeadSheetManager.getCellStyleTitulo());
 			}
 		}
-
-
-
 	}
 
-
-
-	@FXML
-	private void generarXLSX(){
-		Task<Boolean> process = procesarDirectorio();
-		new Thread(process).start();        
+	public Boolean generarXLSX(){
+		return procesarDirectorio();
 	}
 
 

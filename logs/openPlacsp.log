@@ -1,0 +1,48 @@
+2023-10-07 22:25:27.261 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202201.zip to ./2022/01/202201.zip
+2023-10-07 22:25:27.638 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/01
+2023-10-07 22:26:13.750 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202202.zip to ./2022/02/202202.zip
+2023-10-07 22:26:13.793 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/02
+2023-10-07 22:26:42.587 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202203.zip to ./2022/03/202203.zip
+2023-10-07 22:26:42.636 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/03
+2023-10-07 22:27:18.757 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202204.zip to ./2022/04/202204.zip
+2023-10-07 22:27:19.005 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/04
+2023-10-07 22:27:47.627 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202205.zip to ./2022/05/202205.zip
+2023-10-07 22:27:47.890 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/05
+2023-10-07 22:28:28.006 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202206.zip to ./2022/06/202206.zip
+2023-10-07 22:28:28.147 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/06
+2023-10-07 22:29:09.447 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202207.zip to ./2022/07/202207.zip
+2023-10-07 22:29:09.494 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/07
+2023-10-07 22:29:50.726 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202208.zip to ./2022/08/202208.zip
+2023-10-07 22:29:50.773 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/08
+2023-10-07 22:30:26.930 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202209.zip to ./2022/09/202209.zip
+2023-10-07 22:30:26.976 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/09
+2023-10-07 22:31:13.278 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202210.zip to ./2022/10/202210.zip
+2023-10-07 22:31:13.330 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/10
+2023-10-07 22:32:18.827 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202211.zip to ./2022/11/202211.zip
+2023-10-07 22:32:19.042 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/11
+2023-10-07 22:33:56.851 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202212.zip to ./2022/12/202212.zip
+2023-10-07 22:33:57.013 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2022/12
+2023-10-07 22:35:22.466 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202301.zip to ./2023/01/202301.zip
+2023-10-07 22:35:22.649 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/01
+2023-10-07 22:36:32.867 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202302.zip to ./2023/02/202302.zip
+2023-10-07 22:36:33.091 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/02
+2023-10-07 22:38:11.316 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202303.zip to ./2023/03/202303.zip
+2023-10-07 22:38:11.462 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/03
+2023-10-07 22:39:56.873 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202304.zip to ./2023/04/202304.zip
+2023-10-07 22:39:57.009 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/04
+2023-10-07 22:41:24.928 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202305.zip to ./2023/05/202305.zip
+2023-10-07 22:41:25.153 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/05
+2023-10-07 22:43:19.309 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202306.zip to ./2023/06/202306.zip
+2023-10-07 22:43:19.464 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/06
+2023-10-07 22:45:04.440 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202307.zip to ./2023/07/202307.zip
+2023-10-07 22:45:04.658 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/07
+2023-10-07 22:46:39.039 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202308.zip to ./2023/08/202308.zip
+2023-10-07 22:46:39.292 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/08
+2023-10-07 22:47:55.861 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202309.zip to ./2023/09/202309.zip
+2023-10-07 22:47:56.016 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/09
+2023-10-07 22:49:18.717 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202310.zip to ./2023/10/202310.zip
+2023-10-07 22:49:18.849 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/10
+2023-10-07 22:49:36.251 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202311.zip to ./2023/11/202311.zip
+2023-10-07 22:49:36.296 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/11
+2023-10-07 22:49:36.298 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Downloading https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_202312.zip to ./2023/12/202312.zip
+2023-10-07 22:49:36.431 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creating directory ./documents/2023/12

@@ -14,5 +14,6 @@
     <orderEntry type="library" name="jaxb-core-4.0.3" level="project" />
     <orderEntry type="library" name="jaxb-runtime-4.0.3" level="project" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="squareup.okio" level="project" />
   </component>
 </module>
