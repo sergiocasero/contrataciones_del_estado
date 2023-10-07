@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    =========================================================
+
+    Lista de códigos definida por la DGPE en el marco del proyecto CODICE
+
+     =========================================================
+     -->
+<gc:CodeList xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/">
+	<Identification>
+		<!-- ===== Códigos de Resultado de la Licitación definidos por la DGPE  ===== -->
+		<!-- ===== Tender Result Codes defined by the Spanish DGPE ===== -->
+		<ShortName>TenderResultCode</ShortName>
+		<LongName xml:lang="en">Tender Result Code </LongName>
+		<LongName xml:lang="es">Codigo de resultado de la licitacion.</LongName>
+		<LongName Identifier="listID">DGPE 11</LongName>
+		<Version>2.02</Version>
+		<CanonicalUri>urn:dgpe:names:specification:codice:codelist:gc:TenderResultCode</CanonicalUri>
+		<CanonicalVersionUri>urn:dgpe:names:specification:codice:codelist:gc:TenderResultCode-2.02</CanonicalVersionUri>
+		<LocationUri>http://contrataciondelestado.es/codice/cl/2.02/TenderResultCode-2.02.gc</LocationUri>
+		<Agency>
+			<LongName xml:lang="es">Direccion General del Patrimonio del Estado</LongName>
+		</Agency>
+	</Identification>
+	<ColumnSet>
+		<Column Id="code" Use="required">
+			<ShortName>Code</ShortName>
+			<Data Type="normalizedString" xml:lang="en"/>
+		</Column>
+		<Column Id="name" Use="optional">
+			<ShortName>Name</ShortName>
+			<Data Type="string" xml:lang="en"/>
+		</Column>
+		<Column Id="nombre" Use="optional">
+			<ShortName>Nombre</ShortName>
+			<Data Type="string" xml:lang="es"/>
+		</Column>
+		<Key Id="codeKey">
+			<ShortName>CodeKey</ShortName>
+			<ColumnRef Ref="code"/>
+		</Key>
+	</ColumnSet>
+	<SimpleCodeList>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>1</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Provisionally Awarded</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Adjudicado Provisionalmente</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>2</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Finally Awarded</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Adjudicado Definitivamente</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>3</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Void</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Desierto</SimpleValue>
+			</Value>
+		</Row>		
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>4</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Abandoned</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Desistimiento</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>5</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Revoked</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Renuncia</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>6</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Provisionally Void</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Desierto Provisionalmente</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>7</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Finally Void</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Desierto Definitivamente</SimpleValue>
+			</Value>
+		</Row>		
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>8</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Awarded</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Adjudicado</SimpleValue>
+			</Value>
+		</Row>	
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>9</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Formalized</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Formalizado</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>10</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Highest Rated</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Licitador mejor valorado:Requerimiento de documentacion</SimpleValue>
+			</Value>
+		</Row>									
+				
+	</SimpleCodeList>
+</gc:CodeList>

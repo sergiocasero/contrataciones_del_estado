@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+		  CODICE2 Genericode File FundingProgramCode
+          Direccion General del Patrimonio del Estado
+		  
+
+     -->
+<gc:CodeList xsi:schemaLocation="http://docs.oasis-open.org/codelist/ns/genericode/1.0/ http://docs.oasis-open.org/codelist/cs-genericode-1.0/xsd/genericode.xsd" xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Identification>
+    <ShortName>FundingProgramCode</ShortName>
+    <LongName>Códigos de Programas de financiación</LongName>
+    <Version>2.08</Version>
+    <CanonicalUri>urn:dgpe:names:specification:codice:codelist:gc:FundingProgramCode</CanonicalUri>
+    <CanonicalVersionUri>urn:dgpe:names:specification:codice:codelist:gc:FundingProgramCode-2.08</CanonicalVersionUri>
+    <LocationUri>http://contrataciondelestado.es/codice/cl/2.08/FundingProgramCode-2.08.gc</LocationUri>
+  </Identification>
+  <ColumnSet>
+    <Column Id="code" Use="required">
+      <ShortName>Code</ShortName>
+      <Data Type="normalizedString"/>
+    </Column>
+    <Column Id="nombre" Use="optional">
+      <ShortName>Nombre</ShortName>
+      <Data Type="string" Lang="es"/>
+    </Column>
+    <Column Id="name" Use="optional">
+      <ShortName>Name</ShortName>
+      <Data Type="string" Lang="en"/>
+    </Column>
+    <Key Id="codeKey">
+      <ShortName>CodeKey</ShortName>
+      <ColumnRef Ref="code"/>
+    </Key>
+  </ColumnSet>
+  <SimpleCodeList>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>EU</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Financiaci&#243;n con fondos de la UE</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Financing with EU funds</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>NAC</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Subvencionado por un programa nacional</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>National Program Funded</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>AUT</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Subvencionado por un programa auton&#243;mico</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Autonomic Region Program Funded</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>LOC</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Subvencionado por un programa local</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Local Program Funded</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>CPTI</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Compra P&#250;blica de Tecnolog&#237;a Innovadora</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Innovative Technology</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>CPP</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Compra P&#250;blica Precomercial</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Pre-commercial Public Procurement</SimpleValue>
+      </Value>
+    </Row>
+	
+	
+	
+	<!-- nuevos códigos versión 2.08 -->
+	
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>NO-EU</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>No hay financiación con fondos de la UE</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>There is no financing with EU funds</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>REU</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Ayuda a la Recuperación para la cohesión y los territorios de Europa</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Recovery assistance for cohesion and the territories of Europe</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>FEDER</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Fondo Europeo de Desarrollo Regional</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>European Regional Development Fund</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>FSE+</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Fondo Social Europeo Plus</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>European Social Fund Plus </SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>FEADER</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Fondo Europeo Agrícola del Desarrollo Rural</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>European Agricultural Fund for Rural Development</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>FEMP</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Fondo Europeo Marítimo y de Pesca</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>European Maritime and Fisheries Fund</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>PRTR</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Asociado al Plan de Recuperación, Transformación y Resiliencia</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Associated with the Recovery, Transformation and Resilience Plan</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>OFE</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Otros Fondos Europeos</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Other European Funds</SimpleValue>
+      </Value>
+    </Row>
+	
+	
+	
+  </SimpleCodeList>
+</gc:CodeList>

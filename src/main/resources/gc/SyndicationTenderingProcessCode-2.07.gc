@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    =========================================================
+
+    Lista de códigos definida por la DGPE en el marco del proyecto CODICE
+
+     =========================================================
+     -->
+<gc:CodeList xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/">
+	<Identification>
+		<!-- ===== Tipos definidos a partir de los requerimientos establecidos en la Directiva 2014/24/UE y recogidos en la Ley 9/2017		===== -->
+		<!-- ===== Codes defined upon the European Directive 2014/24/UE and Spanish Act 9/2017 ===== -->
+		<ShortName>SyndicationTenderingProcessCode</ShortName>
+		<LongName xml:lang="en">Tendering Process Code</LongName>
+		<LongName xml:lang="es">Tipos de Procedimientos de Contratación en el Sector Público</LongName>
+		<Version>2.07</Version>
+		<CanonicalUri>urn:dgpe:names:specification:codice:codelist:gc:SyndicationTenderingProcessCode</CanonicalUri>
+		<CanonicalVersionUri>urn:dgpe:names:specification:codice:codelist:gc:SyndicationTenderingProcessCode-2.07</CanonicalVersionUri>
+		<LocationUri>https://contrataciondelestado.es/codice/cl/2.07/SyndicationTenderingProcessCode-2.07.gc</LocationUri>
+		<Agency>
+			<LongName xml:lang="es">Direccion General del Patrimonio del Estado</LongName>
+		</Agency>
+	</Identification>
+	<ColumnSet>
+		<Column Id="code" Use="required">
+			<ShortName>Code</ShortName>
+			<Data Type="normalizedString" xml:lang="en"/>
+		</Column>
+		<Column Id="nombre" Use="optional">
+			<ShortName>Nombre</ShortName>
+			<Data Type="string" xml:lang="es"/>
+		</Column>
+		<Column Id="name" Use="optional">
+			<ShortName>Name</ShortName>
+			<Data Type="string" xml:lang="en"/>
+		</Column>
+		<Key Id="codeKey">
+			<ShortName>CodeKey</ShortName>
+			<ColumnRef Ref="code"/>
+		</Key>
+	</ColumnSet>
+	<SimpleCodeList>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>1</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Abierto</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Open</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>2</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Restringido</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Restricted</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>3</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Negociado sin publicidad</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Negotiated without publicity</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>4</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Negociado con publicidad</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Negotiated with publicity</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>5</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Diálogo competitivo</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Competitive dialogue</SimpleValue>
+			</Value>
+		</Row>
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>6</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Contrato menor</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Minor contract</SimpleValue>
+			</Value>
+		</Row>	
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>7</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Derivado de acuerdo marco</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Contract based on a framework agreement</SimpleValue>
+			</Value>
+		</Row>	
+		<Row>
+			<Value ColumnRef="code">
+				<SimpleValue>100</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Normas internas</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Autodefined</SimpleValue>
+			</Value>
+		</Row>	
+
+        <Row>
+			<Value ColumnRef="code">
+				<SimpleValue>999</SimpleValue>
+			</Value>
+			<Value ColumnRef="nombre">
+				<SimpleValue>Otros</SimpleValue>
+			</Value>
+			<Value ColumnRef="name">
+				<SimpleValue>Other</SimpleValue>
+			</Value>
+		 </Row>	
+	<!--Nuevos valores version 2.07-->
+	 <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>8</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Concurso de proyectos</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Design contest</SimpleValue>
+      </Value>
+    </Row>
+	 <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>9</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Abierto simplificado</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Simplified open</SimpleValue>
+      </Value>
+    </Row>
+	 <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>10</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Asociación para la innovación</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Association for innovation</SimpleValue>
+      </Value>
+    </Row>
+	 <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>11</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Derivado de asociación para la innovación</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Based on association for innovation</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>12</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Basado en un sistema dinámico de adquisición</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Based on a dynamic purchasing system</SimpleValue>
+      </Value>
+    </Row>
+	<Row>
+      <Value ColumnRef="code">
+        <SimpleValue>13</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Licitación con negociación</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Tender with negotiation</SimpleValue>
+      </Value>
+    </Row>	
+	</SimpleCodeList>
+</gc:CodeList>

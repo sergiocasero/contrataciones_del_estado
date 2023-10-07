@@ -1,0 +1,1 @@
+javaw -jar open-placsp-2.0.1-complete.jar

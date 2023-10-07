@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright 2021 Subdirección General de Coordinación de la Contratación Electronica - Dirección General Del Patrimonio Del Estado - Subsecretaría de Hacienda - Ministerio de Hacienda - Administración General del Estado - Gobierno de España
+  
+  Licencia con arreglo a la EUPL, Versión 1.2 o –en cuanto sean aprobadas por la Comisión Europea– versiones posteriores de la EUPL (la «Licencia»);
+  Solo podrá usarse esta obra si se respeta la Licencia.
+  Puede obtenerse una copia de la Licencia en:
+  
+  https://joinup.ec.europa.eu/software/page/eupl
+  
+  Salvo cuando lo exija la legislación aplicable o se acuerde por escrito, el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL», SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas.
+  Véase la Licencia en el idioma concreto que rige los permisos y limitaciones que establece la Licencia.
+-->
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.age.dgpe.placsp.risp.parser.view.RootLayoutController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Ayuda">
+            <items>
+              <MenuItem fx:id="aboutOpenPLACSP" mnemonicParsing="false" text="Sobre OpenPLACSP" />
+              <MenuItem fx:id="helpAlert" mnemonicParsing="false" text="Manual de OpenPLACSP" />
+                  <MenuItem fx:id="portalDatosAbiertos" mnemonicParsing="false" onAction="#goToDatosAbiertosPLACSP" text="Portal de Datos Abiertos ..." />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

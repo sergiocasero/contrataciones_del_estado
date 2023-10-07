@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright 2021 Subdirección General de Coordinación de la Contratación Electronica - Dirección General Del Patrimonio Del Estado - Subsecretaría de Hacienda - Ministerio de Hacienda - Administración General del Estado - Gobierno de España
+  
+  Licencia con arreglo a la EUPL, Versión 1.2 o –en cuanto sean aprobadas por la Comisión Europea– versiones posteriores de la EUPL (la «Licencia»);
+  Solo podrá usarse esta obra si se respeta la Licencia.
+  Puede obtenerse una copia de la Licencia en:
+  
+  https://joinup.ec.europa.eu/software/page/eupl
+  
+  Salvo cuando lo exija la legislación aplicable o se acuerde por escrito, el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL», SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas.
+  Véase la Licencia en el idioma concreto que rige los permisos y limitaciones que establece la Licencia.
+-->
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="1350.0" maxWidth="1200.0" minHeight="350.0" minWidth="300.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.age.dgpe.placsp.risp.parser.view.ParserController">
+   <children>
+      <TreeView fx:id="treeDatos" layoutX="11.0" layoutY="311.0" prefHeight="359.0" prefWidth="570.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="311.0" />
+      <Button fx:id="buttonGenerar" layoutX="411.0" layoutY="160.0" mnemonicParsing="false" onAction="#generarXLSX" prefHeight="61.0" prefWidth="221.0" text="Generar fichero de datos" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="160.0">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <TextField fx:id="textFieldDirOrigen" editable="false" layoutX="97.0" layoutY="71.0" prefHeight="25.0" prefWidth="480.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+         <tooltip>
+            <Tooltip text="Fichero más reciente del conjutno de ficheros que se van a procesar. Por defecto, el fichero que no tiene marca de tiempo en su nombre." />
+         </tooltip></TextField> 
+      <TextField fx:id="textFieldOutputFile" editable="false" layoutX="97.0" layoutY="130.0" prefHeight="25.0" prefWidth="480.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="130.0">
+         <tooltip>
+            <Tooltip text="Ruta del fichero de datos que se va a generar" />
+         </tooltip></TextField>
+      <Label layoutX="97.0" layoutY="51.0" prefHeight="17.0" prefWidth="103.0" text="Fichero Raiz:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+      <Label layoutX="97.0" layoutY="110.0" prefHeight="17.0" prefWidth="88.0" text="Fichero Destino:" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="110.0" />
+      <ImageView fitHeight="44.0" fitWidth="168.0" layoutX="-5.0" layoutY="4.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <image>
+            <Image url="@MinisterioLogo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="228.0" layoutX="195.0" layoutY="3.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="5.0">
+         <image>
+            <Image url="@logoPLACE.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="buttonDirIn" layoutX="8.0" layoutY="71.0" mnemonicParsing="false" text="Seleccionar" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="70.0" />
+      <Button fx:id="buttonDirOut" layoutX="8.0" layoutY="130.0" mnemonicParsing="false" text="Seleccionar" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="130.0" />
+      <Text layoutX="7.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de licitaciones procesadas:" wrappingWidth="237.13671875" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="200.0" />
+      <Text layoutX="7.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Número de ficheros procesados:" wrappingWidth="237.13671875" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="170.0" />
+      <Text fx:id="n_licitaciones" layoutX="270.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="200.0" />
+      <Text fx:id="n_ficheros" layoutX="270.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="170.0" />
+      <Text layoutX="428.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OpenPLACSP" wrappingWidth="151.0" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <Text layoutX="21.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="El procesamiento puede tardar varios minutos dependiendo de la cantidad de licitaciones que se carguen" AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="257.0" />
+      <ProgressBar fx:id="progreso" layoutX="30.0" layoutY="281.0" prefHeight="18.0" prefWidth="539.0" progress="0.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
+      <RadioButton fx:id="rbDosTablas" layoutX="80.0" layoutY="232.0" mnemonicParsing="false" selected="true" text="Fichero con dos tablas" AnchorPane.leftAnchor="80.0">
+         <toggleGroup>
+            <ToggleGroup fx:id="numeroHojas" />
+         </toggleGroup>
+         <tooltip>
+            <Tooltip text="Se genera una tabla con los datos comunes de las licitaciones y otra tabla con los resultados de las lictaciones" />
+         </tooltip>
+      </RadioButton>
+      <RadioButton fx:id="rbUnaTabla" layoutX="288.0" layoutY="232.0" mnemonicParsing="false" text="Fichero con una tabla" toggleGroup="$numeroHojas" AnchorPane.leftAnchor="300.0">
+         <tooltip>
+            <Tooltip text="Se genera una única tabla con los datos comunes de las licitaciones y con sus resultados. Por cada licitación se muestran tantas columnas como resultados tenga" />
+         </tooltip></RadioButton>
+      <!-- <Text layoutX="385.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%" wrappingWidth="17.13671875" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="170.0" />
+      <Text fx:id="porcientoFicherosProcesados" layoutX="395.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="RIGHT" wrappingWidth="30.13671875" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="170.0" /> -->
+   </children>
+</AnchorPane>

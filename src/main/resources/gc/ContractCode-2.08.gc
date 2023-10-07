@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+		  CODICE2 Genericode File ContractCode
+          Direccion General del Patrimonio del Estado
+		  
+
+     -->
+<gc:CodeList xsi:schemaLocation="http://docs.oasis-open.org/codelist/ns/genericode/1.0/ http://docs.oasis-open.org/codelist/cs-genericode-1.0/xsd/genericode.xsd" xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Identification>
+    <ShortName>ContractCode</ShortName>
+    <LongName>Tipos de Contrato</LongName>
+    <Version>2.08</Version>
+    <CanonicalUri>urn:dgpe:names:specification:codice:codelist:gc:ContractCode</CanonicalUri>
+    <CanonicalVersionUri>urn:dgpe:names:specification:codice:codelist:gc:ContractCode-2.08</CanonicalVersionUri>
+    <LocationUri>http://contrataciondelestado.es/codice/cl/2.08/ContractCode-2.08.gc</LocationUri>
+  </Identification>
+  <ColumnSet>
+    <Column Id="code" Use="required">
+      <ShortName>Code</ShortName>
+      <Data Type="normalizedString"/>
+    </Column>
+    <Column Id="nombre" Use="optional">
+      <ShortName>Nombre</ShortName>
+      <Data Type="string" Lang="es"/>
+    </Column>
+    <Column Id="name" Use="optional">
+      <ShortName>Name</ShortName>
+      <Data Type="string" Lang="en"/>
+    </Column>
+    <Key Id="codeKey">
+      <ShortName>CodeKey</ShortName>
+      <ColumnRef Ref="code"/>
+    </Key>
+  </ColumnSet>
+  <SimpleCodeList>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>1</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Suministros</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Goods</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>2</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Servicios</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Services</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>3</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Obras</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Works</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>21</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Gesti&#243;n de Servicios P&#250;blicos</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Public services management</SimpleValue>
+      </Value>
+    </Row>
+    
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>22</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Concesi&#243;n de Servicios</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>services concession</SimpleValue>
+      </Value>
+    </Row>
+    
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>31</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Concesi&#243;n de Obras P&#250;blicas</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Public works concession</SimpleValue>
+      </Value>
+    </Row>
+     <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>32</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Concesi&#243;n de Obras</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Works concession</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>40</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Colaboraci&#243;n entre el sector p&#250;blico y sector privado</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Public and private sector collaboration</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>7</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Administrativo especial</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Special Administrative</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>8</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Privado</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Private</SimpleValue>
+      </Value>
+    </Row>
+    <Row>
+      <Value ColumnRef="code">
+        <SimpleValue>50</SimpleValue>
+      </Value>
+      <Value ColumnRef="nombre">
+        <SimpleValue>Patrimonial</SimpleValue>
+      </Value>
+      <Value ColumnRef="name">
+        <SimpleValue>Patrimonial</SimpleValue>
+      </Value>
+    </Row>
+  </SimpleCodeList>
+</gc:CodeList>
