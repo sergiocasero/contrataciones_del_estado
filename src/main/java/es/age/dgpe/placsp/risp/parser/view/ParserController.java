@@ -71,63 +71,24 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class ParserController implements Initializable {
+public class ParserController {
 
 	private final Logger logger = LogManager.getLogger(ParserController.class.getName());
 
-	@FXML
-	private CheckBox checkLink;
+	public String textFieldDirOrigen;
 
-	@FXML
-	private CheckBox checkNumExpediente;
+	public String textFieldOutputFile;
 
-	@FXML
-	private CheckBox checkObjetoContrato;
+	public boolean isDosTablas;
 
-	@FXML
-	public TextField textFieldDirOrigen;
+	public String n_licitaciones;
 
-	@FXML
-	public TextField textFieldOutputFile;
+	public String n_ficheros;
 
-	@FXML
-	private RadioButton rbUnaTabla;
-
-	@FXML
-	private RadioButton rbDosTablas;
-
-
-	@FXML
-	private TreeView<String> treeDatos;
-
-	@FXML
-	private CheckBoxTreeItem<String> rootItem;
-
-	@FXML
-	private Text n_licitaciones;
-
-	@FXML
-	private Text n_ficheros;
-
-
-	@FXML
-	private ProgressBar progreso;
-
-	@FXML
-	private Button buttonGenerar;
-
-	@FXML
-	private Button buttonDirIn;
-
-	@FXML
-	private Button buttonDirOut;
 
 	// Reference to the main application.
-	private MainApp mainApp;
 
 	private static Unmarshaller atomUnMarshaller;
-
-	Alert aError = new Alert(AlertType.NONE);  
 
 
 	ArrayList<DatosLicitacionGenerales> seleccionLicitacionGenerales;
@@ -136,82 +97,11 @@ public class ParserController implements Initializable {
 	ArrayList<DatosCPM> seleccionConsultasPreliminares;
 
 
-	/*
-	 * initialize se ejecuta despu�s del constructor y sirve para la carga de datos din�mica, en este caso, del TreeView con las variables de los datos
-	 */
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.rootItem = new CheckBoxTreeItem<String> ("Publicaciones");
-		rootItem.setExpanded(true);
-		this.treeDatos.setEditable(true);
-		this.treeDatos.setCellFactory(CheckBoxTreeCell.<String>forTreeView());
-
-
-		//Se crea el nodo para los datos de las licitaciones. Tendr� dos subnodos (generales y resultados)
-		CheckBoxTreeItem<String> datosLicitaciones = new CheckBoxTreeItem<String> ("Datos de la licitaci�n");
-		rootItem.getChildren().add(datosLicitaciones);
-
-		CheckBoxTreeItem<String> datosLicitacioneGenerales = new CheckBoxTreeItem<String> ("Datos Generales");
-		datosLicitaciones.getChildren().add(datosLicitacioneGenerales);
-		for (DatosLicitacionGenerales dato: DatosLicitacionGenerales.values()) {
-			CheckBoxTreeItem<String> item = new CheckBoxTreeItem<String> (dato.getTiulo());
-			datosLicitacioneGenerales.getChildren().add(item);
-		}
-
-		CheckBoxTreeItem<String> datosResultados = new CheckBoxTreeItem<String> ("Datos de Resultados");
-		datosLicitaciones.getChildren().add(datosResultados);
-		for (DatosResultados dato: DatosResultados.values()) {
-			CheckBoxTreeItem<String> item = new CheckBoxTreeItem<String> (dato.getTiulo());
-			datosResultados.getChildren().add(item);
-		}
-
-
-		//Se crea el nodo para los encargos a medios propios
-		CheckBoxTreeItem<String> datosEMP = new CheckBoxTreeItem<String> ("Encargos a medios propios");
-		rootItem.getChildren().add(datosEMP);
-		for (DatosEMP dato: DatosEMP.values()) {
-			CheckBoxTreeItem<String> item = new CheckBoxTreeItem<String> (dato.getTiulo());
-			datosEMP.getChildren().add(item);
-		}
-
-
-
-		//Se crea el nodo para las consultas preliminares de mercado
-		CheckBoxTreeItem<String> datosCPM = new CheckBoxTreeItem<String> ("Consultas preliminares de mercado");
-		rootItem.getChildren().add(datosCPM);
-		for (DatosCPM dato: DatosCPM.values()) {
-			CheckBoxTreeItem<String> item = new CheckBoxTreeItem<String> (dato.getTiulo());
-			datosCPM.getChildren().add(item);
-		}
-
-
-
-		this.treeDatos.setRoot(rootItem);
-		this.treeDatos.setShowRoot(true);
-
-		//no deber�a hacer falta apriori, pero as� forzamos y nos aseguramos de que salgan las variables como opciones
-		this.treeDatos.refresh();
-
-		//Paso de la funci�n de selecci�n de rutas de directorios para datos de entrada y de salida
-		buttonDirIn.setOnAction(e -> selectDir(textFieldDirOrigen, true));
-		buttonDirOut.setOnAction(e -> selectDir(textFieldOutputFile, false));
-	}
-
-
 	/**
 	 * The constructor. The constructor is called before the initialize() method.
 	 */
 	public ParserController() {
 
-	}
-
-	/**
-	 * Is called by the main application to give a reference back to itself.
-	 * 
-	 * @param mainApp
-	 */
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
 	}
 	
 	private void selectDir(TextField inout, boolean isIn) {
@@ -269,7 +159,7 @@ public class ParserController implements Initializable {
  					updateProgress(0, 1);
 
 					//Se crea el Stream de salida en el path indicado
-					output_file = new FileOutputStream(new File(textFieldOutputFile.getText()));
+					output_file = new FileOutputStream(new File(textFieldOutputFile));
 
 					logger.debug("Se realiza la revisi�n de los datos seleccionados");
 					recogerDatosSeleccionados();
@@ -282,7 +172,7 @@ public class ParserController implements Initializable {
 
 					//Se crean las hojas necesarias
 					logger.debug("Creaci�n de hojas de c�lculo");
-					SpreeadSheetManager spreeadSheetManager = new SpreeadSheetManager(rbDosTablas.isSelected(), seleccionEncargosMediosPropios.size()>0, seleccionConsultasPreliminares.size()>0);
+					SpreeadSheetManager spreeadSheetManager = new SpreeadSheetManager(isDosTablas, seleccionEncargosMediosPropios.size()>0, seleccionConsultasPreliminares.size()>0);
 
 					logger.debug("Se comienzan a a�adir los t�tulos");
 					insertarTitulos(spreeadSheetManager);
@@ -291,7 +181,7 @@ public class ParserController implements Initializable {
 					logger.info("T�tulos a�adidos y tama�os de columnas ajustados");
 
 					// Se comprueba que exista el ficheroRISP a procesar
-					File ficheroRISP = new File(textFieldDirOrigen.getText());
+					File ficheroRISP = new File(textFieldDirOrigen);
 					String directorioPath = ficheroRISP.getParent();
 					boolean existeFicheroRisp = ficheroRISP.exists() && ficheroRISP.isFile();
 
@@ -299,7 +189,7 @@ public class ParserController implements Initializable {
 						logger.info("Directorio originen de ficheros RISP-PLACSP: " + directorioPath);
 						logger.info("Fichero r�iz: " + ficheroRISP.getName());
 					} else {
-						logger.error("No se puede acceder al fichero " + textFieldDirOrigen.getText());
+						logger.error("No se puede acceder al fichero " + textFieldDirOrigen);
 					}
 
 					File[] lista_ficherosRISP = ficheroRISP.getParentFile().listFiles();
@@ -372,7 +262,7 @@ public class ParserController implements Initializable {
 										}
 									} else {
 										//Es una licitaci�n
-										if (rbDosTablas.isSelected()) {
+										if (isDosTablas) {
 											//La salida es en dos tablas
 											procesarEntry(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.LICITACIONES), fechaDeleted, seleccionLicitacionGenerales);
 											procesarEntryResultados(entry, spreeadSheetManager.getWorkbook().getSheet(SpreeadSheetManager.RESULTADOS), fechaDeleted, seleccionLicitacionResultados);
@@ -402,7 +292,7 @@ public class ParserController implements Initializable {
 						updateProgress(1, 1);
 					}
 
-					logger.info("Creando el fichero " + textFieldOutputFile.getText());
+					logger.info("Creando el fichero " + textFieldOutputFile);
 					logger.info("N�mero de ficheros procesados " + numeroFicherosProcesados);
 					logger.info("N�mero de elementos entry existentes: " + numeroEntries);
 					logger.info("Licitaciones insertadas en el fichero: " + entriesProcesadas.size());
@@ -416,41 +306,24 @@ public class ParserController implements Initializable {
 					output_file.close(); // close the file
 					spreeadSheetManager.getWorkbook().close();
 					// para mostrar algunos resultados en la interfaz de usuario
-					n_licitaciones.setText(Integer.toString(entriesProcesadas.size()));
-					n_ficheros.setText(Integer.toString(numeroFicherosProcesados));
+					n_licitaciones = (Integer.toString(entriesProcesadas.size()));
+					n_ficheros = (Integer.toString(numeroFicherosProcesados));
 
 					
 					
 					logger.info("Fin del proceso de generaci�n del fichero");
 
-					Platform.runLater(() -> {
-						aError.setAlertType(AlertType.INFORMATION);
-						aError.setHeaderText(null);
-						aError.setContentText("El proceso de generaci�n del fichero ha terminado con �xito");
-						aError.show();
-					});
+
 
 				} catch (JAXBException e) {// ventanas de error para las excepciones contempladas
 					e.printStackTrace();
 					String auxError = "Error al procesar el fichero ATOM. No se puede continuar con el proceso.";
 					logger.error(auxError);
 					logger.debug(e.getStackTrace());
-					Platform.runLater(() -> {
-						aError.setAlertType(AlertType.ERROR);
-						aError.setHeaderText(null);
-						aError.setContentText(auxError);
-						aError.show();
-					});
 				} catch (FileNotFoundException e) {
 					String auxError = "Error al generar el fichero de salida. No se pudo crear un fichero en la ruta indicada o no pudo ser abierto por alguna otra raz�n.";
 					logger.error(auxError);
 					logger.debug(e.toString());
-					Platform.runLater(() -> {
-						aError.setAlertType(AlertType.ERROR);
-						aError.setHeaderText(null);
-						aError.setContentText(auxError);
-						aError.show();
-					});
 				} catch (Exception e) {
 					// error inesperado
 					String auxError = "Error inesperado, revise la configuraci�n y el log...";
@@ -458,12 +331,6 @@ public class ParserController implements Initializable {
 					logger.error(auxError);
 					logger.debug(e.getStackTrace());
 					logger.debug(e.getMessage());
-					Platform.runLater(() -> {
-						aError.setAlertType(AlertType.ERROR);
-						aError.setHeaderText(null);
-						aError.setContentText(auxError);
-						aError.show();
-					});
 				} finally {
 					return true;
 				}
@@ -602,7 +469,6 @@ public class ParserController implements Initializable {
 	 * @param entry
 	 * @param sheet
 	 * @param fechaDeleted
-	 * @param buscadorDatosSeleecionables
 	 * @param buscadorDatosResultados
 	 */
 	private void procesarEntryCompleta(EntryType entry, SXSSFSheet sheet, GregorianCalendar fechaDeleted,
@@ -975,12 +841,7 @@ public class ParserController implements Initializable {
 
 	@FXML
 	private void generarXLSX(){
-		progreso.progressProperty().unbind();
-		progreso.setProgress(0);
 		Task<Boolean> process = procesarDirectorio();
-		progreso.progressProperty().unbind();
-		progreso.progressProperty().bind(process.progressProperty());
-		buttonGenerar.disableProperty().bind(process.runningProperty());
 		new Thread(process).start();        
 	}
 
