@@ -1,15 +1,4 @@
-/*******************************************************************************
- * Copyright 2021 Subdirección General de Coordinación de la Contratación Electronica - Dirección General Del Patrimonio Del Estado - Subsecretaría de Hacienda - Ministerio de Hacienda - Administración General del Estado - Gobierno de España
- * 
- * Licencia con arreglo a la EUPL, Versión 1.2 o –en cuanto sean aprobadas por la Comisión Europea– versiones posteriores de la EUPL (la «Licencia»);
- * Solo podrá usarse esta obra si se respeta la Licencia.
- * Puede obtenerse una copia de la Licencia en:
- * 
- * https://joinup.ec.europa.eu/software/page/eupl
- * 
- * Salvo cuando lo exija la legislación aplicable o se acuerde por escrito, el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL», SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas.
- * Véase la Licencia en el idioma concreto que rige los permisos y limitaciones que establece la Licencia.
- ******************************************************************************/
+
 package es.age.dgpe.placsp.risp.parser.model;
 
 import java.math.BigDecimal;
@@ -23,7 +12,7 @@ import es.age.dgpe.placsp.risp.parser.utils.genericode.GenericodeTypes;
 import ext.place.codice.common.caclib.ContractFolderStatusType;
 
 public enum DatosResultados {
-	NUMERO_EXPEDIENTE("Número de expediente") {
+	NUMERO_EXPEDIENTE("Nï¿½mero de expediente") {
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			String numExpediente = contractFolder.getContractFolderID().getValue();
@@ -43,7 +32,7 @@ public enum DatosResultados {
 			return numLote;
 		}
 	},
-	OBJETO("Objeto licitación/lote"){
+	OBJETO("Objeto licitaciï¿½n/lote"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -58,7 +47,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	IMPORTE_CON_IMPUESTOS("Presupuesto base con impuestos licitación/lote", EnumFormatos.MONEDA){
+	IMPORTE_CON_IMPUESTOS("Presupuesto base con impuestos licitaciï¿½n/lote", EnumFormatos.MONEDA){
 		@Override
 		public BigDecimal valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -73,7 +62,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	IMPORTE_SIN_IMPUESTOS("Presupuesto base sin impuestos licitación/lote", EnumFormatos.MONEDA){
+	IMPORTE_SIN_IMPUESTOS("Presupuesto base sin impuestos licitaciï¿½n/lote", EnumFormatos.MONEDA){
 		@Override
 		public BigDecimal valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -88,7 +77,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	CPV("CPV licitación/lote"){
+	CPV("CPV licitaciï¿½n/lote"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			String valoresCPV = "";
@@ -109,7 +98,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	LUGAR_EJEUCION("Lugar ejecución licitación/lote"){
+	LUGAR_EJEUCION("Lugar ejecuciï¿½n licitaciï¿½n/lote"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			String codigo = "";
@@ -118,15 +107,15 @@ public enum DatosResultados {
 				ProcurementProjectLotType procurementProjectLot = getProcurementProjectLot(contractFolder, indice);
 				ProcurementProjectType procurementProjectType;
 				if (procurementProjectLot == null) {
-					//La licitación no está estructurada en lotes
+					//La licitaciï¿½n no estï¿½ estructurada en lotes
 					procurementProjectType = contractFolder.getProcurementProject();
 				}
 				else {
-					//La licitación se estructura en lotes
+					//La licitaciï¿½n se estructura en lotes
 					procurementProjectType = procurementProjectLot.getProcurementProject();
 				}
 				
-				//Se obtiene el código y la descripción del lugar de ejecución
+				//Se obtiene el cï¿½digo y la descripciï¿½n del lugar de ejecuciï¿½n
 				try {
 					codigo = procurementProjectType.getRealizedLocation().getCountrySubentityCode().getValue();				
 				}catch(Exception e) {
@@ -139,7 +128,7 @@ public enum DatosResultados {
 				}
 
 				if (codigo == "" && descripcion == "") {
-					//No existe un código NUTS. Se intenta obtener el codigo del país
+					//No existe un cï¿½digo NUTS. Se intenta obtener el codigo del paï¿½s
 					try {
 						codigo = procurementProjectType.getRealizedLocation().getAddress().getCountry().getIdentificationCode().getValue();
 					}catch(Exception e) {
@@ -157,7 +146,7 @@ public enum DatosResultados {
 			return codigo + " - " + descripcion;
 		}
 	},
-	RESULTADO("Resultado licitación/lote"){
+	RESULTADO("Resultado licitaciï¿½n/lote"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -167,7 +156,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	FECHA_ACUERDO("Fecha del acuerdo licitación/lote", EnumFormatos.FECHA_CORTA){
+	FECHA_ACUERDO("Fecha del acuerdo licitaciï¿½n/lote", EnumFormatos.FECHA_CORTA){
 		@Override
 		public GregorianCalendar valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -177,7 +166,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	OFERTAS_RECIBIDAS("Número de ofertas recibidas por licitación/lote", EnumFormatos.NUMERO){
+	OFERTAS_RECIBIDAS("Nï¿½mero de ofertas recibidas por licitaciï¿½n/lote", EnumFormatos.NUMERO){
 		@Override
 		public BigDecimal valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -187,7 +176,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	PRECIO_OFERTA_MAS_BAJA("Precio de la oferta más baja por licitación/lote", EnumFormatos.MONEDA){
+	PRECIO_OFERTA_MAS_BAJA("Precio de la oferta mï¿½s baja por licitaciï¿½n/lote", EnumFormatos.MONEDA){
 		@Override
 		public BigDecimal valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -197,7 +186,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	PRECIO_OFERTA_MAS_ALTA("Precio de la oferta más alta por licitación/lote", EnumFormatos.MONEDA){
+	PRECIO_OFERTA_MAS_ALTA("Precio de la oferta mï¿½s alta por licitaciï¿½n/lote", EnumFormatos.MONEDA){
 		@Override
 		public BigDecimal valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -207,7 +196,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	EXCLUIDAS_OFERTAS_ANORM_BAJAS("Se han excluído ofertas por ser anormalmente bajas por licitación/lote"){
+	EXCLUIDAS_OFERTAS_ANORM_BAJAS("Se han excluï¿½do ofertas por ser anormalmente bajas por licitaciï¿½n/lote"){
 		@Override
 		public Boolean valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -217,7 +206,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	NUMERO_CONTRATO("Número del contrato licitación/lote", EnumFormatos.TEXTO){
+	NUMERO_CONTRATO("Nï¿½mero del contrato licitaciï¿½n/lote", EnumFormatos.TEXTO){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -227,7 +216,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	FECHA_FORMALIZACION("Fecha formalización del contrato licitación/lote", EnumFormatos.FECHA_CORTA){
+	FECHA_FORMALIZACION("Fecha formalizaciï¿½n del contrato licitaciï¿½n/lote", EnumFormatos.FECHA_CORTA){
 		@Override
 		public GregorianCalendar valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -237,7 +226,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	FECHA_ENTRADA_VIGOR("Fecha entrada en vigor del contrato de licitación/lote", EnumFormatos.FECHA_CORTA){
+	FECHA_ENTRADA_VIGOR("Fecha entrada en vigor del contrato de licitaciï¿½n/lote", EnumFormatos.FECHA_CORTA){
 		@Override
 		public GregorianCalendar valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -247,7 +236,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	ADJUDICATARIO("Adjudicatario licitación/lote"){
+	ADJUDICATARIO("Adjudicatario licitaciï¿½n/lote"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -257,7 +246,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	TIPO_ID_ADJUDICATARIO("Tipo de identificador de adjudicatario por licitación/lote"){
+	TIPO_ID_ADJUDICATARIO("Tipo de identificador de adjudicatario por licitaciï¿½n/lote"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -267,7 +256,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	ID_ADJUDICATARIO ("Identificador Adjudicatario de la licitación/lote"){
+	ID_ADJUDICATARIO ("Identificador Adjudicatario de la licitaciï¿½n/lote"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -277,7 +266,7 @@ public enum DatosResultados {
 			}			
 		}
 	},
-	ES_PYME("El adjudicatario es o no PYME de la licitación/lote"){
+	ES_PYME("El adjudicatario es o no PYME de la licitaciï¿½n/lote"){
 		@Override
 		public Boolean valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -287,7 +276,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	IMPORTE_ADJ_SIN_IMPUESTOS("Importe adjudicación sin impuestos licitación/lote", EnumFormatos.MONEDA){
+	IMPORTE_ADJ_SIN_IMPUESTOS("Importe adjudicaciï¿½n sin impuestos licitaciï¿½n/lote", EnumFormatos.MONEDA){
 		@Override
 		public BigDecimal valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -297,7 +286,7 @@ public enum DatosResultados {
 			}
 		}
 	},
-	IMPORTE_ADJ_CON_IMPUESTOS("Importe adjudicación con impuestos licitación/lote", EnumFormatos.MONEDA){
+	IMPORTE_ADJ_CON_IMPUESTOS("Importe adjudicaciï¿½n con impuestos licitaciï¿½n/lote", EnumFormatos.MONEDA){
 		@Override
 		public BigDecimal valorCodice(ContractFolderStatusType contractFolder, int indice) {
 			try {
@@ -334,7 +323,7 @@ public enum DatosResultados {
 	public abstract Object valorCodice(ContractFolderStatusType contractFolder, int indiceTenderResult);
 
 	/**
-	 * Método que devuleve el procurementproject asociado al resultado que existe en
+	 * Mï¿½todo que devuleve el procurementproject asociado al resultado que existe en
 	 * el lugar indicado
 	 * 
 	 * @param contractFolder

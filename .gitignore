@@ -1,3 +1,9 @@
 out/*
 .idea/*
 2021_01/*
+documents/*
+node_modules/*
+output/*
+backend/*
+build/*
+.gradle/*

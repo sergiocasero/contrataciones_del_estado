@@ -4,32 +4,67 @@ import es.age.dgpe.placsp.risp.parser.view.ParserController
 import okio.BufferedSink
 import okio.buffer
 import okio.sink
-import org.apache.logging.log4j.LogManager
+import org.apache.logging.log4j.Level
 import java.io.File
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.Calendar
+import java.util.logging.LogManager
 import java.util.logging.Logger
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
 
 
-private val logger = LogManager.getLogger(ParserController::class.java.name)
-fun main() {
-    bulkDownload()
+private val logger = Logger.getLogger(ParserController::class.java.name)
+
+fun main(args: Array<String>) {
+    bulkProcessing()
+}
+
+fun extractCurrentMonth() {
+    // get current year and month
+    val year = Calendar.getInstance().get(Calendar.YEAR)
+    val month = Calendar.getInstance().get(Calendar.MONTH) + 1
+
+    val monthStr = if (month < 10) "0$month" else "$month"
+
+    extractContractsFrom(monthStr, year.toString())
 }
 
 fun bulkProcessing() {
+    // get all year folders inside ./documents
+    val years = File("./documents").listFiles()?.filter { it.isDirectory }?.map { it.name }
+
+    years?.forEach { year ->
+        // get all month folders inside ./documents/$year
+        val months = File("./documents/$year").listFiles()?.filter { it.isDirectory }?.map { it.name }
+
+        months?.forEach {month ->
+            extractContractsFrom(month, year)
+        }
+    }
+}
+
+fun extractContractsFrom(month: String, year: String) {
     val parser = ParserController()
+    val filename = "licitacionesPerfilesContratanteCompleto3.atom"
+    val xmlFile = "./documents/$year/$month/$filename"
+    logger.info("Parsing $xmlFile")
 
-    parser.textFieldDirOrigen = "./2021_01/licitacionesPerfilesContratanteCompleto3.atom"
-    parser.textFieldOutputFile = "./2021_01/8.xlsx"
-
-    val result = parser.generarXLSX()
-
-    // loop to download all zips, the first month is 01/2012, latest is 10/2023
+    // create year and month folder
+    File("./output").mkdirs()
+    File("./output/$year").mkdirs()
+    File("./output/$year/$month").mkdirs()
 
 
+    // delete previous xlsx file if exists
+    val previousXLSX = "./output/$year/$month/${month}_$year.xlsx"
+    File(previousXLSX).delete()
+
+    parser.textFieldDirOrigen = xmlFile
+    parser.textFieldOutputFile = previousXLSX
+    parser.generarXLSX()
 }
 
 fun bulkDownload() {

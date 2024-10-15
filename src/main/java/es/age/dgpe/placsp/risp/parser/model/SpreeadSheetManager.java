@@ -1,15 +1,4 @@
-/*******************************************************************************
- * Copyright 2021 Subdirección General de Coordinación de la Contratación Electronica - Dirección General Del Patrimonio Del Estado - Subsecretaría de Hacienda - Ministerio de Hacienda - Administración General del Estado - Gobierno de España
- * 
- * Licencia con arreglo a la EUPL, Versión 1.2 o –en cuanto sean aprobadas por la Comisión Europea– versiones posteriores de la EUPL (la «Licencia»);
- * Solo podrá usarse esta obra si se respeta la Licencia.
- * Puede obtenerse una copia de la Licencia en:
- * 
- * https://joinup.ec.europa.eu/software/page/eupl
- * 
- * Salvo cuando lo exija la legislación aplicable o se acuerde por escrito, el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL», SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas.
- * Véase la Licencia en el idioma concreto que rige los permisos y limitaciones que establece la Licencia.
- ******************************************************************************/
+
 package es.age.dgpe.placsp.risp.parser.model;
 
 import java.io.IOException;
@@ -82,12 +71,12 @@ public class SpreeadSheetManager {
 
 
 	/**
-	 * Creación de objeto
+	 * Creaciï¿½n de objeto
 	 */
 	public SpreeadSheetManager(boolean dosHojasLicitaciones, boolean hojaEMP, boolean hojaCPM) throws Exception{
 		
 		
-		// Se crea a partir de una plantilla y se añaden dos hojas
+		// Se crea a partir de una plantilla y se aï¿½aden dos hojas
 		try {
 			String rutaPlantilla = Config.getProperty("open-placsp.template.xlsx");
 			
@@ -95,7 +84,7 @@ public class SpreeadSheetManager {
 
 			workbook.createSheet(LICITACIONES);
 			if(dosHojasLicitaciones) {
-				//Se añaden dos hojas al woorkbook
+				//Se aï¿½aden dos hojas al woorkbook
 				workbook.createSheet(RESULTADOS); 
 			}
 			
@@ -132,9 +121,9 @@ public class SpreeadSheetManager {
 			// Moneda
 			cellStyleMoneda = workbook.createCellStyle();
 			CreationHelper createHelperMoneda = workbook.getCreationHelper();
-			cellStyleMoneda.setDataFormat(createHelperMoneda.createDataFormat().getFormat("#,##0.00 €"));
+			cellStyleMoneda.setDataFormat(createHelperMoneda.createDataFormat().getFormat("#,##0.00 ï¿½"));
 			
-			//Título
+			//Tï¿½tulo
 			cellStyleTitulo = workbook.createCellStyle();
 			Font font= workbook.createFont();
 		    font.setFontHeightInPoints((short)12);
@@ -158,7 +147,7 @@ public class SpreeadSheetManager {
 	}
 
 	/**
-	 * Función que devuleve el estilo de XLSX asociado al tipo formato
+	 * Funciï¿½n que devuleve el estilo de XLSX asociado al tipo formato
 	 * @param 
 	 * @return
 	 */

@@ -1,15 +1,4 @@
-/*******************************************************************************
- * Copyright 2021 Subdirección General de Coordinación de la Contratación Electronica - Dirección General Del Patrimonio Del Estado - Subsecretaría de Hacienda - Ministerio de Hacienda - Administración General del Estado - Gobierno de España
- * 
- * Licencia con arreglo a la EUPL, Versión 1.2 o –en cuanto sean aprobadas por la Comisión Europea– versiones posteriores de la EUPL (la «Licencia»);
- * Solo podrá usarse esta obra si se respeta la Licencia.
- * Puede obtenerse una copia de la Licencia en:
- * 
- * https://joinup.ec.europa.eu/software/page/eupl
- * 
- * Salvo cuando lo exija la legislación aplicable o se acuerde por escrito, el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL», SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas.
- * Véase la Licencia en el idioma concreto que rige los permisos y limitaciones que establece la Licencia.
- ******************************************************************************/
+
 package es.age.dgpe.placsp.risp.parser.model;
 
 import java.math.BigDecimal;
@@ -27,7 +16,7 @@ import ext.place.codice.common.caclib.ContractFolderStatusType;
 import ext.place.codice.common.caclib.NoticeInfoType;
  
 public enum DatosEMP{
-	PRIMERA_PUBLICACION("Primera publicación", EnumFormatos.FECHA_CORTA) {
+	PRIMERA_PUBLICACION("Primera publicaciï¿½n", EnumFormatos.FECHA_CORTA) {
 	@Override
 		public GregorianCalendar valorCodice(ContractFolderStatusType contractFolder) {
 			GregorianCalendar primeraPublicacion = null;
@@ -43,7 +32,7 @@ public enum DatosEMP{
 									.getAdditionalPublicationStatus()) {
 								// Se comprueba si el medio es el perfil de contratante
 								if (additionalPublicationStatus.getPublicationMediaName().getValue().equalsIgnoreCase("Perfil del Contratante")) {
-									// Se obtiene la fecha más antigua
+									// Se obtiene la fecha mï¿½s antigua
 									for (AdditionalPublicationDocumentReferenceType additionalPublicationDocumentReference : additionalPublicationStatus
 											.getAdditionalPublicationDocumentReference()) {
 										GregorianCalendar fecha = additionalPublicationDocumentReference.getIssueDate().getValue().toGregorianCalendar();
@@ -76,7 +65,7 @@ public enum DatosEMP{
 			}
 		}
 	},
-	NUMERO_EXPEDIENTE ("Número de expediente"){
+	NUMERO_EXPEDIENTE ("Nï¿½mero de expediente"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder){
 			try {
@@ -156,7 +145,7 @@ public enum DatosEMP{
 			}			
 		}
 	},
-	LUGAR_EJECUCION ("Lugar de ejecución"){
+	LUGAR_EJECUCION ("Lugar de ejecuciï¿½n"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder) {
 			String codigo = "";
@@ -173,7 +162,7 @@ public enum DatosEMP{
 			}
 			
 			if (codigo == "" && descripcion == "") {
-				//Se intenta obtener el codigo del país
+				//Se intenta obtener el codigo del paï¿½s
 				try {
 					codigo = contractFolder.getProcurementProject().getRealizedLocation().getAddress().getCountry().getIdentificationCode().getValue();
 				}catch(Exception e) {
@@ -190,7 +179,7 @@ public enum DatosEMP{
 			return codigo + " - " + descripcion;
 		}
 	},
-	ORGANO_CONTRATACION ("Órgano de Contratación"){
+	ORGANO_CONTRATACION ("ï¿½rgano de Contrataciï¿½n"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder) {
 			try {
@@ -258,7 +247,7 @@ public enum DatosEMP{
 			}			
 		}
 	},
-	TIPO_ADMINISTRACION ("Tipo de Administración"){
+	TIPO_ADMINISTRACION ("Tipo de Administraciï¿½n"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder) {
 			try {				
@@ -268,7 +257,7 @@ public enum DatosEMP{
 			}			
 		}
 	},
-	CODIGO_POSTAL ("Código Postal"){
+	CODIGO_POSTAL ("Cï¿½digo Postal"){
 		@Override
 		public String valorCodice(ContractFolderStatusType contractFolder) {
 			try {			

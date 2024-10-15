@@ -1,15 +1,4 @@
-/*******************************************************************************
- * Copyright 2021 Subdirecci�n General de Coordinaci�n de la Contrataci�n Electronica - Direcci�n General Del Patrimonio Del Estado - Subsecretar�a de Hacienda - Ministerio de Hacienda - Administraci�n General del Estado - Gobierno de Espa�a
- * 
- * Licencia con arreglo a la EUPL, Versi�n 1.2 o �en cuanto sean aprobadas por la Comisi�n Europea� versiones posteriores de la EUPL (la �Licencia�);
- * Solo podr� usarse esta obra si se respeta la Licencia.
- * Puede obtenerse una copia de la Licencia en:
- * 
- * https://joinup.ec.europa.eu/software/page/eupl
- * 
- * Salvo cuando lo exija la legislaci�n aplicable o se acuerde por escrito, el programa distribuido con arreglo a la Licencia se distribuye �TAL CUAL�, SIN GARANT�AS NI CONDICIONES DE NING�N TIPO, ni expresas ni impl�citas.
- * V�ase la Licencia en el idioma concreto que rige los permisos y limitaciones que establece la Licencia.
- ******************************************************************************/
+
 package es.age.dgpe.placsp.risp.parser.view;
 
 import java.io.File;
@@ -18,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,7 +28,6 @@ import org.w3._2005.atom.EntryType;
 import org.w3._2005.atom.FeedType;
 import org.w3._2005.atom.LinkType;
 
-import es.age.dgpe.placsp.risp.parser.MainApp;
 import es.age.dgpe.placsp.risp.parser.model.DatosCPM;
 import es.age.dgpe.placsp.risp.parser.model.DatosEMP;
 import es.age.dgpe.placsp.risp.parser.model.DatosLicitacionGenerales;
@@ -48,22 +35,7 @@ import es.age.dgpe.placsp.risp.parser.model.DatosResultados;
 import es.age.dgpe.placsp.risp.parser.model.SpreeadSheetManager;
 import ext.place.codice.common.caclib.ContractFolderStatusType;
 import ext.place.codice.common.caclib.PreliminaryMarketConsultationStatusType;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.CheckBoxTreeItem;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-import javafx.scene.control.cell.CheckBoxTreeCell;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -75,7 +47,7 @@ public class ParserController {
 
 	public String textFieldOutputFile;
 
-	public boolean isDosTablas;
+	public boolean isDosTablas = false;
 
 	public String n_licitaciones;
 
@@ -138,12 +110,6 @@ public class ParserController {
 		FeedType res = null;
 		FileOutputStream output_file = null;
 		InputStreamReader inStream = null;
-
-		seleccionLicitacionGenerales = new ArrayList<DatosLicitacionGenerales>();
-		seleccionLicitacionResultados = new ArrayList<DatosResultados>();
-		seleccionEncargosMediosPropios = new ArrayList<DatosEMP>();
-		seleccionConsultasPreliminares = new ArrayList<DatosCPM>();
-
 
 		try {
 
@@ -322,17 +288,14 @@ public class ParserController {
 		}
 	}
 
-
-
-
-
-
 	/**
 	 * Funci�n paara procesr una entry y extraer todos sus datos.
 	 * @param entry
 	 * @param sheet 
 	 */
 	private void procesarEntry(EntryType entry, SXSSFSheet sheet, GregorianCalendar fechaDeleted, ArrayList<DatosLicitacionGenerales> buscadorDatosSeleecionables) {		
+		logger.debug("Procesando entry: " + entry.toString());
+
 		Cell cell;
 		ContractFolderStatusType contractFolder = ((JAXBElement<ContractFolderStatusType>) entry.getAny().get(0)).getValue();
 
@@ -499,13 +462,11 @@ public class ParserController {
 	 */
 	private void recogerDatosSeleccionados() {
 		HashMap<String, String> seleccionadosArbol;
-		CheckBoxTreeItem<String> nodo ;
 
-
-		DatosLicitacionGenerales.values();
-		DatosResultados.values();
-		DatosEMP.values();
-		DatosCPM.values();
+		seleccionLicitacionGenerales = new ArrayList<DatosLicitacionGenerales>();
+		seleccionLicitacionResultados = new ArrayList<DatosResultados>();
+		seleccionEncargosMediosPropios = new ArrayList<DatosEMP>();
+		seleccionConsultasPreliminares = new ArrayList<DatosCPM>();
 
 		Collections.addAll(seleccionLicitacionGenerales, DatosLicitacionGenerales.values());
 
@@ -664,20 +625,6 @@ public class ParserController {
 	}
 
 
-
-	//funcion auxiliar para recoger los checkboxes seleccionados
-	private HashMap<String, String> findCheckedBoxes(CheckBoxTreeItem<String> nodoTree) {
-		HashMap<String, String> checkedItems = new HashMap<String, String>();
-
-		for (TreeItem<String> child : nodoTree.getChildren()) {
-			// if (((CheckBoxTreeItem<String>)child).isSelected()) {
-				checkedItems.put(child.getValue(),  child.getValue());
-			// }
-		}
-		return checkedItems;
-	}
-
-
 	/**
 	 * M�todo que inserta los t�tulos en las hojas disponibles
 	 * @param spreeadSheetManager
@@ -791,6 +738,7 @@ public class ParserController {
 	}
 
 	public Boolean generarXLSX(){
+		recogerDatosSeleccionados();
 		return procesarDirectorio();
 	}
 

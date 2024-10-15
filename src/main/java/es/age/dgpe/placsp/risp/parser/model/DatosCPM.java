@@ -1,15 +1,4 @@
-/*******************************************************************************
- * Copyright 2021 Subdirección General de Coordinación de la Contratación Electronica - Dirección General Del Patrimonio Del Estado - Subsecretaría de Hacienda - Ministerio de Hacienda - Administración General del Estado - Gobierno de España
- * 
- * Licencia con arreglo a la EUPL, Versión 1.2 o –en cuanto sean aprobadas por la Comisión Europea– versiones posteriores de la EUPL (la «Licencia»);
- * Solo podrá usarse esta obra si se respeta la Licencia.
- * Puede obtenerse una copia de la Licencia en:
- * 
- * https://joinup.ec.europa.eu/software/page/eupl
- * 
- * Salvo cuando lo exija la legislación aplicable o se acuerde por escrito, el programa distribuido con arreglo a la Licencia se distribuye «TAL CUAL», SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ni expresas ni implícitas.
- * Véase la Licencia en el idioma concreto que rige los permisos y limitaciones que establece la Licencia.
- ******************************************************************************/
+
 package es.age.dgpe.placsp.risp.parser.model;
 
 import java.util.GregorianCalendar;
@@ -26,7 +15,7 @@ import ext.place.codice.common.caclib.NoticeInfoType;
 import ext.place.codice.common.caclib.PreliminaryMarketConsultationStatusType;
  
 public enum DatosCPM{
-	PRIMERA_PUBLICACION("Primera publicación", EnumFormatos.FECHA_CORTA) {
+	PRIMERA_PUBLICACION("Primera publicaciï¿½n", EnumFormatos.FECHA_CORTA) {
 	@Override
 		public GregorianCalendar valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket) {
 			GregorianCalendar primeraPublicacion = null;
@@ -42,7 +31,7 @@ public enum DatosCPM{
 									.getAdditionalPublicationStatus()) {
 								// Se comprueba si el medio es el perfil de contratante
 								if (additionalPublicationStatus.getPublicationMediaName().getValue().equalsIgnoreCase("Perfil del Contratante")) {
-									// Se obtiene la fecha más antigua
+									// Se obtiene la fecha mï¿½s antigua
 									for (AdditionalPublicationDocumentReferenceType additionalPublicationDocumentReference : additionalPublicationStatus
 											.getAdditionalPublicationDocumentReference()) {
 										GregorianCalendar fecha = additionalPublicationDocumentReference.getIssueDate().getValue().toGregorianCalendar();
@@ -75,7 +64,7 @@ public enum DatosCPM{
 			}
 		}
 	},
-	NUMERO_EXPEDIENTE ("Número de consulta preliminar"){
+	NUMERO_EXPEDIENTE ("Nï¿½mero de consulta preliminar"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket){
 			try {
@@ -107,7 +96,7 @@ public enum DatosCPM{
 			}
 		}
 	},
-	FECHA_LIMITE_RESPUESTA ("Fecha límite de respuesta", EnumFormatos.FECHA_CORTA){
+	FECHA_LIMITE_RESPUESTA ("Fecha lï¿½mite de respuesta", EnumFormatos.FECHA_CORTA){
 		@Override
 		public GregorianCalendar valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket) {
 			try {
@@ -117,7 +106,7 @@ public enum DatosCPM{
 			}
 		}
 	},
-	DIRECCION_PRESENTACION ("Dirección para presentación"){
+	DIRECCION_PRESENTACION ("Direcciï¿½n para presentaciï¿½n"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket){
 			try {
@@ -139,7 +128,7 @@ public enum DatosCPM{
 			}
 		}
 	},
-	CONDICIONES_CONSULTA ("Condiciones o términos de envío de la consulta"){
+	CONDICIONES_CONSULTA ("Condiciones o tï¿½rminos de envï¿½o de la consulta"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket){
 			try {
@@ -150,7 +139,7 @@ public enum DatosCPM{
 			}
 		}
 	},
-	FUTURA_LIC_TIPO_CONTRATO ("Futura licitación. Tipo de contrato"){
+	FUTURA_LIC_TIPO_CONTRATO ("Futura licitaciï¿½n. Tipo de contrato"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket) {
 			try {
@@ -160,7 +149,7 @@ public enum DatosCPM{
 			}
 		}
 	},
-	FUTURA_LIC_OBJETO ("Futura licitación. Objeto"){
+	FUTURA_LIC_OBJETO ("Futura licitaciï¿½n. Objeto"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket) {
 			try {
@@ -170,7 +159,7 @@ public enum DatosCPM{
 			}
 		}
 	},
-	FUTURA_LIC_PROCEDIMIENTO ("Futura licitación. Procedimiento"){
+	FUTURA_LIC_PROCEDIMIENTO ("Futura licitaciï¿½n. Procedimiento"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket) {
 			try {
@@ -194,7 +183,7 @@ public enum DatosCPM{
 			}			
 		}
 	},
-	ORGANO_CONTRATACION ("Órgano de Contratación"){
+	ORGANO_CONTRATACION ("ï¿½rgano de Contrataciï¿½n"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket) {
 			try {
@@ -262,7 +251,7 @@ public enum DatosCPM{
 			}			
 		}
 	},
-	TIPO_ADMINISTRACION ("Tipo de Administración"){
+	TIPO_ADMINISTRACION ("Tipo de Administraciï¿½n"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket) {
 			try {				
@@ -272,7 +261,7 @@ public enum DatosCPM{
 			}			
 		}
 	},
-	CODIGO_POSTAL ("Código Postal"){
+	CODIGO_POSTAL ("Cï¿½digo Postal"){
 		@Override
 		public String valorCodice(PreliminaryMarketConsultationStatusType preliminaryMarket) {
 			try {			
