@@ -7,3 +7,4 @@ output/*
 backend/*
 build/*
 .gradle/*
+xlsx_extractor/venv/*

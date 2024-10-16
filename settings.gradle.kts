@@ -12,5 +12,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "regla_de_tres"
+rootProject.name = "contratos_del_estado"
 include(":app")
