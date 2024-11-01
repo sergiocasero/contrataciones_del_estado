@@ -18,6 +18,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
@@ -35,9 +38,6 @@ import es.age.dgpe.placsp.risp.parser.model.DatosResultados;
 import es.age.dgpe.placsp.risp.parser.model.SpreeadSheetManager;
 import ext.place.codice.common.caclib.ContractFolderStatusType;
 import ext.place.codice.common.caclib.PreliminaryMarketConsultationStatusType;
-import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class ParserController {
 

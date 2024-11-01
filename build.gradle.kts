@@ -2,6 +2,7 @@ plugins {
     id("java")
     kotlin("jvm") version "1.9.10"
     application
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 application {
@@ -18,4 +19,7 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.26")
     implementation("org.apache.poi:poi:5.0.0")
     implementation("org.apache.poi:poi-ooxml:5.0.0")
+
+    implementation("org.openjfx:javafx-controls:19")
+    implementation("org.openjfx:javafx-fxml:19")
 }
