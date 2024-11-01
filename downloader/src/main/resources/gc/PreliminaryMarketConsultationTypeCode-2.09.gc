@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+		  CODICE2 Generico de File PreliminaryMarketConsultationTypeCode
+          Direccion General del Patrimonio del Estado
+		  
+
+     -->
+<gc:CodeList xsi:schemaLocation="http://docs.oasis-open.org/codelist/ns/genericode/1.0/ http://docs.oasis-open.org/codelist/cs-genericode-1.0/xsd/genericode.xsd" xmlns:gc="http://docs.oasis-open.org/codelist/ns/genericode/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Identification>
+    <ShortName>PreliminaryMarketConsultationTypeCode</ShortName>
+    <LongName>Tipos de Consulta</LongName>
+    <Version>2.09</Version>
+    <CanonicalUri>urn:dgpe:names:specification:codice:codelist:gc:PreliminaryMarketConsultationTypeCode</CanonicalUri>
+    <CanonicalVersionUri>urn:dgpe:names:specification:codice:codelist:gc:PreliminaryMarketConsultationTypeCode-2.09</CanonicalVersionUri>
+    <LocationUri>http://contrataciondelestado.es/codice/cl/2.09/PreliminaryMarketConsultationTypeCode-2.09.gc</LocationUri>
+  </Identification>
+  <ColumnSet>
+    <Column Id="code" Use="required">
+      <ShortName>Code</ShortName>
+      <Data Type="normalizedString"/>
+    </Column>
+    <Column Id="nombre" Use="optional">
+      <ShortName>Nombre</ShortName>
+      <Data Type="string" Lang="es"/>
+    </Column>
+    <Column Id="name" Use="optional">
+      <ShortName>Name</ShortName>
+      <Data Type="string" Lang="en"/>
+    </Column>
+    <Key Id="codeKey">
+      <ShortName>CodeKey</ShortName>
+      <ColumnRef Ref="code"/>
+    </Key>
+  </ColumnSet>
+  <SimpleCodeList>
+    <Row>
+		<Value ColumnRef="code">
+			<SimpleValue>A</SimpleValue>
+		</Value>
+		<Value ColumnRef="nombre">
+			<SimpleValue>Consulta abierta</SimpleValue>
+		</Value>
+		<Value ColumnRef="name">
+        	<SimpleValue>Consulta abierta</SimpleValue>
+      	</Value>
+	</Row>
+	<Row>
+		<Value ColumnRef="code">
+			<SimpleValue>S</SimpleValue>
+		</Value>
+		<Value ColumnRef="nombre">
+			<SimpleValue>Selecci&#243;n de participantes</SimpleValue>
+		</Value>
+		<Value ColumnRef="name">
+	        <SimpleValue>Selecci&#243;n de participantes</SimpleValue>
+	      </Value>
+	</Row>	
+  </SimpleCodeList>
+</gc:CodeList>
