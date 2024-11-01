@@ -4,13 +4,10 @@ import es.age.dgpe.placsp.risp.parser.view.ParserController
 import okio.BufferedSink
 import okio.buffer
 import okio.sink
-import org.apache.logging.log4j.Level
 import java.io.File
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.Calendar
-import java.util.logging.LogManager
 import java.util.logging.Logger
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
@@ -19,64 +16,72 @@ import java.util.zip.ZipInputStream
 private val logger = Logger.getLogger(ParserController::class.java.name)
 
 fun main(args: Array<String>) {
-    bulkProcessing()
+    bulkProcessing(2018, 2024)
 }
 
-fun extractCurrentMonth() {
-    // get current year and month
-    val year = Calendar.getInstance().get(Calendar.YEAR)
-    val month = Calendar.getInstance().get(Calendar.MONTH) + 1
-
-    val monthStr = if (month < 10) "0$month" else "$month"
-
-    extractContractsFrom(monthStr, year.toString())
+fun deletePreviousOutput() {
+    File("./output").deleteRecursively()
 }
 
-fun bulkProcessing() {
+fun bulkProcessing(fromYear: Int, toYear: Int) {
     // get all year folders inside ./documents
-    val years = File("./documents").listFiles()?.filter { it.isDirectory }?.map { it.name }
+    val years = listOf(fromYear..toYear).flatten().map { it.toString() }
 
-    years?.forEach { year ->
+    years.forEach { year ->
         // get all month folders inside ./documents/$year
-        val months = File("./documents/$year").listFiles()?.filter { it.isDirectory }?.map { it.name }
+        listOf("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12").forEach {month ->
+            if(!isAlreadyDownloaded(month, year)) {
+                val zipDir = downloadContractZip(month, year)
+                extractContractsFrom(month, year, zipDir)
+            }
+        }
 
-        months?.forEach {month ->
-            extractContractsFrom(month, year)
+        if(!isAlreadyDownloaded("minor", year)) {
+            val minorContractZipDir = downloadMinorContracts(year)
+            extractContractsFrom("minor", year, minorContractZipDir)
         }
     }
 }
 
-fun extractContractsFrom(month: String, year: String) {
+fun isAlreadyDownloaded(month: String, year: String): Boolean {
+    val outputFile = "./output/$year/$month/${month}_$year.xlsx"
+    return File(outputFile).exists()
+}
+
+fun extractContractsFrom(month: String, year: String, zipDir: String) {
     val parser = ParserController()
     val filename = "licitacionesPerfilesContratanteCompleto3.atom"
-    val xmlFile = "./documents/$year/$month/$filename"
-    logger.info("Parsing $xmlFile")
+    val atomFile = "$zipDir/$filename"
+    logger.info("Parsing $atomFile")
 
     // create year and month folder
     File("./output").mkdirs()
     File("./output/$year").mkdirs()
     File("./output/$year/$month").mkdirs()
 
+    val outputFile = "./output/$year/$month/${month}_$year.xlsx"
+    File(outputFile).delete()
 
-    // delete previous xlsx file if exists
-    val previousXLSX = "./output/$year/$month/${month}_$year.xlsx"
-    File(previousXLSX).delete()
-
-    parser.textFieldDirOrigen = xmlFile
-    parser.textFieldOutputFile = previousXLSX
+    parser.textFieldDirOrigen = atomFile
+    parser.textFieldOutputFile = outputFile
     parser.generarXLSX()
 }
 
-fun bulkDownload() {
-    for (year in 2022..2023) {
-        for (month in 1..12) {
-            val monthStr = if (month < 10) "0$month" else "$month"
-            downloadZip(year.toString(), monthStr)
-        }
-    }
+fun downloadMinorContracts(year: String): String {
+    val url = "https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_1143/contratosMenoresPerfilesContratantes_$year.zip"
+    val zipFile = "./${year}/minor/${year}.zip"
+    val unzipDir = "./documents/${year}/minor/"
+
+    logger.info("Downloading $url to $zipFile")
+
+    // download with okio
+    downloadAndUnzipZipFile(url, File(unzipDir))
+
+    // return unzipDir
+    return unzipDir
 }
 
-fun downloadZip(year: String, month: String) {
+fun downloadContractZip(month: String, year: String): String {
     // download zip from https://contrataciondelsectorpublico.gob.es/sindicacion/sindicacion_643/licitacionesPerfilesContratanteCompleto3_AAAAMM.zip
     // where AAAA is the year and MM is the month
     // then, unzip it in the AAAA_MM folder (create it if not exists)
@@ -89,8 +94,10 @@ fun downloadZip(year: String, month: String) {
 
     // download with okio
     downloadAndUnzipZipFile(url, File(unzipDir))
-}
 
+    // return unzipDir
+    return unzipDir
+}
 
 fun downloadAndUnzipZipFile(zipUrl: String, destinationDirectory: File) {
     try {
