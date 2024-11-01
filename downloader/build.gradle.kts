@@ -19,8 +19,17 @@ dependencies {
     implementation("org.openjfx:javafx-fxml:19")
 
     implementation("com.squareup.okio:okio:3.9.1")
-    implementation("javax.xml.bind:jaxb-api:2.3.1")
+    implementation("javax.activation:activation:1.1")
+    implementation("org.jvnet.jaxb2.maven2:maven-jaxb2-plugin:0.14.0")
     implementation("org.apache.logging.log4j:log4j-core:2.24.1")
+
+    implementation("org.glassfish.jaxb:jaxb-runtime:2.3.0")
+    implementation("com.sun.xml.bind:jaxb-core:3.0.2")
+    implementation("javax.xml.bind:jaxb-api:2.3.1")
+    implementation("com.sun.xml.bind:jaxb-impl:3.0.2")
+    implementation("javax.activation:activation:1.1.1")
+    implementation("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
+    implementation("org.jvnet.jaxb2.maven2:maven-jaxb2-plugin:0.15.3")
 
 
 }
