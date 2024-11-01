@@ -147,4 +147,4 @@ def insertar_datos_desde_xlsx(carpeta, db_name="licitaciones.db"):
     conn.close()
 
 crear_tabla_licitaciones()
-insertar_datos_desde_xlsx('../output')
+insertar_datos_desde_xlsx('../downloader/output')
