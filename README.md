@@ -50,3 +50,13 @@ Una vez tenemos todos los contratos en ficheros XLSX, tenemos un script `importa
 ## Frontend
 
 TODO
+
+## Pasos necesarios
+
+1. Ir a la carpeta `downloader` y ejecutar `./gradlew run` (necesario jdk)
+2. Ir a la carpeta `xlsx_extractor` y ejecutar:
+    - `python3 -m venv venv`
+    - `source venv/bin/activate`
+    - `pip install -r requirements.txt`
+    - `python import_licitaciones.py`
+3. Para levantar la API: `python app.py`
