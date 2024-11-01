@@ -17,11 +17,12 @@ descarga masiva de la información, si que se puede modificar para tal efecto.
 ## Estado actual
 
 - Descargar contratos ✅ (Desde el 1 de enero de 2018)
-- Descargar contratos menores: TODO
 - Inyectar contratos en una base de datos ✅
 - API Rest para consultar los contratos ✅
-- Frontend que permita interactuar con la API
-- Descarga masiva de la base de datos en formato CSV
+- Descargar contratos menores: TODO
+- Frontend que permita interactuar con la API: TODO
+- Descarga masiva de la base de datos en formato CSV : TODO
+- Migrar de SQLite a Postgres: TODO
 
 ## Diagrama de la solución
 
