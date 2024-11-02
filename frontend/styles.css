@@ -48,3 +48,65 @@ body {
     border: 1px solid #dadce0;
     color: #202124;
 }
+
+#results {
+    width: 80%;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.contract-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.contract-card p {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.contract-card .date {
+    color: #666;
+    font-size: 12px;
+}
+
+.contract-card .organ {
+    font-weight: bold;
+    color: #1a73e8;
+}
+
+.contract-card .amount {
+    font-size: 16px;
+    font-weight: bold;
+    color: #137333;
+}
+
+.contract-card .contractor {
+    color: #444;
+}
+
+.contract-card .contractor-id {
+    color: #666;
+    font-size: 12px;
+}
+
+.link-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #1a73e8;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.link-button:hover {
+    background-color: rgba(26,115,232,0.1);
+}

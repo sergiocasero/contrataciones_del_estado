@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <div class="search-container">
-        <div class="logo">Buscador</div>
+        <div class="logo">Contrataciones del estado</div>
         <form action="#" method="GET">
             <input type="text" class="search-box" placeholder="Buscar en los contratos del estado">
             <div class="search-buttons">
-                <button type="submit" class="search-button">Buscar</button>
-                <button type="button" class="search-button">Me siento con suerte</button>
+                <button type="button" class="search-button">Buscar por CPV</button>
+                <button type="button" class="search-button">Buscar por id</button>
+                <button type="button" class="search-button">Buscar por Adjudicatario</button>
+                <button type="button" class="search-button">Buscar por órgano de contratación</button>
+                <button type="button" class="search-button">Buscar por código postal</button>
+                <button type="button" class="search-button">Buscar por estado</button>
             </div>
         </form>
     </div>
+
+    <div class="overall-stats">
+        <p>Total de contratos: <span id="total-contracts"></span></p>
+        <p>Total de adjudicatarios: <span id="total-contractors"></span></p>
+        <p>Total de importe adjudicado: <span id="total-amount"></span></p>
+    </div>
+
+    <div id="results"></div>
+
+    <script src="./script.js"></script>
 </body>
 </html>

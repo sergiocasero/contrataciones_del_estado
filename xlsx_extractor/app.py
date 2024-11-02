@@ -17,7 +17,15 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    return send_from_directory('./static', 'index.html')
+    return send_from_directory('../frontend', 'index.html')
+
+@app.route('/styles.css')
+def styles():
+    return send_from_directory('../frontend', 'styles.css')
+
+@app.route('/script.js')
+def script():
+    return send_from_directory('../frontend', 'script.js')
 
 @app.route('/licitaciones/overall', methods=['GET'])
 def get_licitaciones_overall():
