@@ -1,37 +1,19 @@
 // Select all buttons
-const buttons = document.querySelectorAll('.search-button');
 const searchBox = document.querySelector('.search-box');
 
 const endpoint = 'http://127.0.0.1:5000';
 
 // Add event listeners to each button
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
+searchBox.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault();
         const searchText = searchBox.value;
 
+        clearSearchBox();
         showProgress();
         
-        switch(button.textContent) {
-            case 'Buscar por CPV':
-                searchByCPV(searchText);
-                break;
-            case 'Buscar por id': 
-                searchById(searchText);
-                break;
-            case 'Buscar por Adjudicatario':
-                searchByContractor(searchText);
-                break;
-            case 'Buscar por órgano de contratación':
-                searchByContractingBody(searchText);
-                break;
-            case 'Buscar por código postal':
-                searchByPostalCode(searchText);
-                break;
-            case 'Buscar por estado':
-                searchByStatus(searchText);
-                break;
-        }
-    });
+        searchLicitaciones(searchText);
+    }
 });
 
 function showProgress() {
@@ -52,64 +34,14 @@ function clearSearchBox() {
     document.getElementById('results-container').innerHTML = '';
 }
 
-// Search functions for each type
-async function searchByCPV(text) {
+// Nueva función de búsqueda definida en app.py
+async function searchLicitaciones(searchTerm) {
     try {
-        const response = await fetch(`${endpoint}/licitaciones/cpv/${text}`);
+        const response = await fetch(`${endpoint}/licitaciones/${searchTerm}`);
         const data = await response.json();
         displayResults(data);
     } catch (error) {
-        console.error('Error searching by CPV:', error);
-    }
-}
-
-async function searchById(text) {
-    try {
-        const response = await fetch(`${endpoint}/licitaciones/${text}`);
-        const data = await response.json();
-        displayResults(data);
-    } catch (error) {
-        console.error('Error searching by ID:', error);
-    }
-}
-
-async function searchByContractor(text) {
-    try {
-        const response = await fetch(`${endpoint}/licitaciones/adjudicatario/${text}`);
-        const data = await response.json();
-        displayResults(data);
-    } catch (error) {
-        console.error('Error searching by contractor:', error);
-    }
-}
-
-async function searchByContractingBody(text) {
-    try {
-        const response = await fetch(`${endpoint}/licitaciones/organo/${text}`);
-        const data = await response.json();
-        displayResults(data);
-    } catch (error) {
-        console.error('Error searching by contracting body:', error);
-    }
-}
-
-async function searchByPostalCode(text) {
-    try {
-        const response = await fetch(`${endpoint}/licitaciones/codigo_postal/${text}`);
-        const data = await response.json();
-        displayResults(data);
-    } catch (error) {
-        console.error('Error searching by postal code:', error);
-    }
-}
-
-async function searchByStatus(text) {
-    try {
-        const response = await fetch(`${endpoint}/licitaciones/estado/${text}`);
-        const data = await response.json();
-        displayResults(data);
-    } catch (error) {
-        console.error('Error searching by status:', error);
+        console.error('Error searching licitaciones:', error);
     }
 }
 
@@ -153,10 +85,19 @@ function displayResults(data) {
         organ.className = 'organ';
         organ.textContent = `Órgano: ${item.Organo_Contratacion}`;
 
+        const nifOC = document.createElement('p');
+        nifOC.className = 'nif-oc';
+        nifOC.textContent = `NIF Órgano: ${item.NIF_OC}`;
+
         const amount = document.createElement('p');
         amount.className = 'amount';
-        amount.textContent = `Importe: ${item.Importe_adjudicacion_sin_impuestos_lote.toLocaleString('es-ES', {style: 'currency', currency: 'EUR'})}`;
+        amount.textContent = `Importe: ${item.Importe_adjudicacion_sin_impuestos_lote ? item.Importe_adjudicacion_sin_impuestos_lote.toLocaleString('es-ES', {style: 'currency', currency: 'EUR'}) : '-€'}`;
 
+        const baseAmount = document.createElement('p');
+        baseAmount.className = 'amount';
+        baseAmount.textContent = `Presupuesto base sin impuestos: ${item.Presupuesto_base_sin_impuestos_lote ? item.Presupuesto_base_sin_impuestos_lote.toLocaleString('es-ES', {style: 'currency', currency: 'EUR'}) : '-€'}`;
+        
+        
         const contractor = document.createElement('p');
         contractor.className = 'contractor';
         contractor.textContent = `Adjudicatario: ${item.Adjudicatario_lote}`;
@@ -165,11 +106,14 @@ function displayResults(data) {
         contractorId.className = 'contractor-id';
         contractorId.textContent = `NIF Adjudicatario: ${item.Identificador_Adjudicatario_lote}`;
 
+
         card.appendChild(linkButton);
         card.appendChild(title);
         card.appendChild(date);
         card.appendChild(organ);
+        card.appendChild(nifOC);
         card.appendChild(amount);
+        card.appendChild(baseAmount);
         card.appendChild(contractor);
         card.appendChild(contractorId);
 

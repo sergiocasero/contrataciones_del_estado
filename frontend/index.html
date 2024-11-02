@@ -19,27 +19,20 @@
             <p><span id="total-contracts"></span> contratos indexados, de <span id="total-contractors"></span> adjudicatarios por un valor total de <span id="total-amount"></span></p>
         </div>
 
+        <div class="search-instructions">
+            <p>Puedes buscar por ID del contrato, adjudicatario, organismo de contratación, NIF del adjudicatario o código postal.</p>
+        </div>
+
         <form action="#" method="GET">
             <div class="search-box-container">
                 <input type="text" class="search-box" placeholder="Buscar en los contratos del estado">
                 <button type="button" class="clear-button" onclick="clearSearchBox()">✖</button>
             </div>
-            <div class="search-buttons">
-                <button type="button" class="search-button">Buscar por CPV</button>
-                <button type="button" class="search-button">Buscar por id</button>
-                <button type="button" class="search-button">Buscar por Adjudicatario</button>
-                <button type="button" class="search-button">Buscar por órgano de contratación</button>
-                <button type="button" class="search-button">Buscar por código postal</button>
-                <button type="button" class="search-button">Buscar por estado</button>
-            </div>
         </form>
     </div>
 
     <div id="progress" style="display: none;">
-        <div class="spinner" style="display: none;">
-            <svg width="50" height="50" viewBox="0 0 50 50">
-                <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-            </svg>
+        Buscando...
     </div>
     </div>
     <div id="results">

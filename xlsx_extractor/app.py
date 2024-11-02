@@ -66,73 +66,31 @@ def get_all_licitaciones():
         'page_size': page_size,
         'data': [dict(row) for row in licitaciones]
     })
-
-@app.route('/licitaciones/cpv/<cpv>', methods=['GET'])
-def get_licitacion_by_cpv(cpv):
+@app.route('/licitaciones/<search_term>', methods=['GET'])
+def search_licitaciones(search_term):
     conn = get_db_connection()
-    query = "SELECT * FROM licitaciones WHERE CPV LIKE ?"
-    licitaciones = conn.execute(query, ('%' + cpv + '%',)).fetchall()
-    conn.close()
-    return jsonify([dict(row) for row in licitaciones])
-
-@app.route('/licitaciones/<identificador>', methods=['GET'])
-def get_licitacion_by_id(identificador):
-    conn = get_db_connection()
-    query = "SELECT * FROM licitaciones WHERE Identificador LIKE ?"
-    licitacion = conn.execute(query, ('%' + identificador + '%',)).fetchall()
-    conn.close()
-    if not licitacion:
-        return jsonify({'error': 'Licitación no encontrada'}), 404
-    
-    total_earn = sum(row['Importe_adjudicacion_sin_impuestos_lote'] for row in licitacion)
-
-    return jsonify({
-        'data': [dict(row) for row in licitacion],
-        'total_rows': len(licitacion),
-        'total_earn': total_earn
-    })
-
-@app.route('/licitaciones/adjudicatario/<identificador>', methods=['GET'])
-def get_licitacion_by_adjudicatario(identificador):
-    conn = get_db_connection()
-    query = "SELECT * FROM licitaciones WHERE Adjudicatario_lote LIKE ? OR Identificador_Adjudicatario_lote LIKE ?"
-    licitaciones = conn.execute(query, ('%' + identificador + '%', '%' + identificador + '%')).fetchall()
+    query = """
+        SELECT * FROM licitaciones 
+        WHERE CPV LIKE ? 
+        OR Identificador LIKE ? 
+        OR Adjudicatario_lote LIKE ? 
+        OR Identificador_Adjudicatario_lote LIKE ? 
+        OR Organo_Contratacion LIKE ? 
+        OR Codigo_postal LIKE ? 
+        OR Estado LIKE ?
+        OR NIF_OC LIKE ?
+    """
+    search_term = '%' + search_term + '%'
+    licitaciones = conn.execute(query, (search_term, search_term, search_term, search_term, search_term, search_term, search_term, search_term)).fetchall()
     conn.close()
 
+    # Eliminar duplicados
+    unique_licitaciones = {row['Identificador']: dict(row) for row in licitaciones}.values()
 
-    total_earn = sum(row['Importe_adjudicacion_sin_impuestos_lote'] for row in licitaciones)
+    # Ordenar por fecha
+    unique_licitaciones = sorted(unique_licitaciones, key=lambda x: x['Fecha_actualizacion'], reverse=True)
 
-    return jsonify({
-        'total_registros': len(licitaciones),
-        'total_ganado': total_earn,
-        'datos': [dict(row) for row in licitaciones]
-    })
-    
-
-@app.route('/licitaciones/organo/<organo>', methods=['GET'])
-def get_licitacion_by_organo_contratacion(organo):
-    conn = get_db_connection()
-    query = "SELECT * FROM licitaciones WHERE Organo_Contratacion LIKE ?"
-    licitaciones = conn.execute(query, ('%' + organo + '%',)).fetchall()
-    conn.close()
-    return jsonify([dict(row) for row in licitaciones])
-
-@app.route('/licitaciones/codigo_postal/<codigo_postal>', methods=['GET'])
-def get_licitacion_by_codigo_postal(codigo_postal):
-    conn = get_db_connection()
-    query = "SELECT * FROM licitaciones WHERE Codigo_postal LIKE ?"
-    licitaciones = conn.execute(query, ('%' + codigo_postal + '%',)).fetchall()
-    conn.close()
-    return jsonify([dict(row) for row in licitaciones])
-
-@app.route('/licitaciones/estado/<estado>', methods=['GET'])
-def get_licitacion_by_estado(estado):
-    conn = get_db_connection()
-    query = "SELECT * FROM licitaciones WHERE Estado LIKE ?"
-    licitaciones = conn.execute(query, ('%' + estado + '%',)).fetchall()
-    conn.close()
-    return jsonify([dict(row) for row in licitaciones])
-
+    return jsonify(list(unique_licitaciones))
 
 if __name__ == '__main__':
     app.run(debug=True)
