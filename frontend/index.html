@@ -7,10 +7,23 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+    <div style="position: absolute; top: 10px; right: 10px;">
+        <a href="https://github.com/sergiocasero/contrataciones_del_estado" target="_blank">
+            <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub Logo" style="width: 40px; height: 40px; vertical-align: middle;">
+        </a>
+    </div>
     <div class="search-container">
         <div class="logo">Contrataciones del estado</div>
+
+        <div class="overall-stats">
+            <p><span id="total-contracts"></span> contratos indexados, de <span id="total-contractors"></span> adjudicatarios por un valor total de <span id="total-amount"></span></p>
+        </div>
+
         <form action="#" method="GET">
-            <input type="text" class="search-box" placeholder="Buscar en los contratos del estado">
+            <div class="search-box-container">
+                <input type="text" class="search-box" placeholder="Buscar en los contratos del estado">
+                <button type="button" class="clear-button" onclick="clearSearchBox()">✖</button>
+            </div>
             <div class="search-buttons">
                 <button type="button" class="search-button">Buscar por CPV</button>
                 <button type="button" class="search-button">Buscar por id</button>
@@ -22,13 +35,21 @@
         </form>
     </div>
 
-    <div class="overall-stats">
-        <p>Total de contratos: <span id="total-contracts"></span></p>
-        <p>Total de adjudicatarios: <span id="total-contractors"></span></p>
-        <p>Total de importe adjudicado: <span id="total-amount"></span></p>
+    <div id="progress" style="display: none;">
+        <div class="spinner" style="display: none;">
+            <svg width="50" height="50" viewBox="0 0 50 50">
+                <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+    </div>
+    </div>
+    <div id="results">
+        <p id="summary"></p>
+        <div id="results-container"></div>
     </div>
 
-    <div id="results"></div>
+    <footer style="text-align: center; margin-top: 50px;">
+        <p>Proyecto desarrollado con ❤️ por Sergio Casero Hernández</p>
+    </footer>
 
     <script src="./script.js"></script>
 </body>

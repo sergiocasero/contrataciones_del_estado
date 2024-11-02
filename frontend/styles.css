@@ -16,20 +16,41 @@ body {
     margin-bottom: 30px;
     color: #4285f4;
 }
+.search-box-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
 .search-box {
-    width: 500px;
+    width: 100%;
     padding: 12px 20px;
     font-size: 16px;
     border: 1px solid #dfe1e5;
     border-radius: 24px;
     outline: none;
+    box-sizing: border-box;
 }
 .search-box:hover, .search-box:focus {
     box-shadow: 0 1px 6px rgba(32,33,36,.28);
     border-color: rgba(223,225,229,0);
 }
+.clear-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
 .search-buttons {
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .search-button {
     background-color: #f8f9fa;
@@ -50,12 +71,23 @@ body {
 }
 
 #results {
-    width: 80%;
+    padding: 0 10px;
+}
+
+#summary {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+#results-container {
+    width: 100%;
     max-width: 1200px;
     margin: 40px auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
+    padding: 0 10px;
 }
 
 .contract-card {
@@ -65,6 +97,13 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: relative;
 }
+
+.contract-card h3 {
+    font-size: 16px;
+    margin: 20px 0;
+    color: #333;
+}
+
 
 .contract-card p {
     margin: 8px 0;
@@ -109,4 +148,36 @@ body {
 
 .link-button:hover {
     background-color: rgba(26,115,232,0.1);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(195, 195, 195, 0.6);
+    border-radius: 50%;
+    border-top-color: #1a73e8;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        font-size: 50px;
+    }
+    .search-box-container {
+        width: 100%;
+    }
+    .search-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    #results-container {
+        grid-template-columns: 1fr;
+    }
 }
