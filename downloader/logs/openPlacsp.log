@@ -437,3 +437,97 @@ javax.xml.bind.JAXBException: "es.age.dgpe.placsp.risp.parser.utils.genericode" 
 2024-11-03 11:54:01.695 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Licitaciones insertadas en el fichero: 8724
 2024-11-03 11:54:01.695 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Comienzo de escritura del fichero de salida
 2024-11-03 11:54:02.139 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Fin del proceso de generaci�n del fichero
+2024-11-03 11:54:11.341 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - T�tulos a�adidos y tama�os de columnas ajustados
+2024-11-03 11:54:11.341 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Directorio originen de ficheros RISP-PLACSP: ./documents/2018/04
+2024-11-03 11:54:11.341 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Fichero r�iz: licitacionesPerfilesContratanteCompleto3.atom
+2024-11-03 11:54:11.341 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - N�mero previsto de ficheros a procesar: 15
+2024-11-03 11:54:11.341 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3.atom
+2024-11-03 11:54:11.341 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 6.666666666666667 %
+2024-11-03 11:54:11.464 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_194539_2.atom
+2024-11-03 11:54:11.464 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 13.333333333333334 %
+2024-11-03 11:54:11.594 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_190110.atom
+2024-11-03 11:54:11.595 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 20.0 %
+2024-11-03 11:54:11.705 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_190110_1.atom
+2024-11-03 11:54:11.705 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 26.666666666666668 %
+2024-11-03 11:54:11.815 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_190110_2.atom
+2024-11-03 11:54:11.815 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 33.33333333333333 %
+2024-11-03 11:54:11.920 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_190110_3.atom
+2024-11-03 11:54:11.920 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 40.0 %
+2024-11-03 11:54:12.031 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_180725.atom
+2024-11-03 11:54:12.031 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 46.666666666666664 %
+2024-11-03 11:54:12.128 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_180725_1.atom
+2024-11-03 11:54:12.128 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 53.333333333333336 %
+2024-11-03 11:54:12.225 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_180725_2.atom
+2024-11-03 11:54:12.225 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 60.0 %
+2024-11-03 11:54:12.325 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_163849.atom
+2024-11-03 11:54:12.325 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 66.66666666666666 %
+2024-11-03 11:54:12.436 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_163849_1.atom
+2024-11-03 11:54:12.436 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 73.33333333333333 %
+2024-11-03 11:54:12.531 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_163849_2.atom
+2024-11-03 11:54:12.532 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 80.0 %
+2024-11-03 11:54:12.642 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_160757.atom
+2024-11-03 11:54:12.642 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 86.66666666666666 %
+2024-11-03 11:54:12.732 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_160757_1.atom
+2024-11-03 11:54:12.732 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 93.33333333333333 %
+2024-11-03 11:54:12.829 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_160757_2.atom
+2024-11-03 11:54:12.829 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 99.99999999999999 %
+2024-11-03 11:54:12.942 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creando el fichero ./output/2018/04/04_2018.xlsx
+2024-11-03 11:54:12.943 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - N�mero de ficheros procesados 15
+2024-11-03 11:54:12.943 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - N�mero de elementos entry existentes: 7469
+2024-11-03 11:54:12.943 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Licitaciones insertadas en el fichero: 6388
+2024-11-03 11:54:12.943 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Comienzo de escritura del fichero de salida
+2024-11-03 11:54:13.275 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Fin del proceso de generaci�n del fichero
+2024-11-03 11:54:23.218 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - T�tulos a�adidos y tama�os de columnas ajustados
+2024-11-03 11:54:23.218 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Directorio originen de ficheros RISP-PLACSP: ./documents/2018/05
+2024-11-03 11:54:23.218 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Fichero r�iz: licitacionesPerfilesContratanteCompleto3.atom
+2024-11-03 11:54:23.218 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - N�mero previsto de ficheros a procesar: 22
+2024-11-03 11:54:23.218 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3.atom
+2024-11-03 11:54:23.218 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 4.545454545454546 %
+2024-11-03 11:54:23.345 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_232024_1.atom
+2024-11-03 11:54:23.346 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 9.090909090909092 %
+2024-11-03 11:54:23.462 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_232024_2.atom
+2024-11-03 11:54:23.463 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 13.636363636363635 %
+2024-11-03 11:54:23.575 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_232024_3.atom
+2024-11-03 11:54:23.575 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 18.181818181818183 %
+2024-11-03 11:54:23.678 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_232024_4.atom
+2024-11-03 11:54:23.678 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 22.72727272727273 %
+2024-11-03 11:54:23.790 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_232024_5.atom
+2024-11-03 11:54:23.790 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 27.272727272727277 %
+2024-11-03 11:54:23.906 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_192509.atom
+2024-11-03 11:54:23.906 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 31.818181818181824 %
+2024-11-03 11:54:24.011 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_192509_1.atom
+2024-11-03 11:54:24.011 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 36.36363636363637 %
+2024-11-03 11:54:24.118 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_192509_2.atom
+2024-11-03 11:54:24.118 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 40.90909090909092 %
+2024-11-03 11:54:24.228 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_192509_3.atom
+2024-11-03 11:54:24.228 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 45.45454545454547 %
+2024-11-03 11:54:24.331 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200525_192509_4.atom
+2024-11-03 11:54:24.331 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 50.000000000000014 %
+2024-11-03 11:54:24.458 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_231159.atom
+2024-11-03 11:54:24.458 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 54.545454545454554 %
+2024-11-03 11:54:24.561 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_231159_1.atom
+2024-11-03 11:54:24.561 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 59.09090909090909 %
+2024-11-03 11:54:24.656 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_231159_2.atom
+2024-11-03 11:54:24.657 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 63.63636363636363 %
+2024-11-03 11:54:24.757 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_231159_3.atom
+2024-11-03 11:54:24.757 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 68.18181818181817 %
+2024-11-03 11:54:24.872 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_204839.atom
+2024-11-03 11:54:24.872 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 72.72727272727272 %
+2024-11-03 11:54:24.980 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_204839_1.atom
+2024-11-03 11:54:24.980 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 77.27272727272727 %
+2024-11-03 11:54:25.084 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_204839_2.atom
+2024-11-03 11:54:25.084 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 81.8181818181818 %
+2024-11-03 11:54:25.177 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_204839_3.atom
+2024-11-03 11:54:25.177 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 86.36363636363635 %
+2024-11-03 11:54:25.273 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_204839_4.atom
+2024-11-03 11:54:25.273 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 90.90909090909088 %
+2024-11-03 11:54:25.373 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_194539.atom
+2024-11-03 11:54:25.373 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 95.45454545454542 %
+2024-11-03 11:54:25.479 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Procesando fichero: licitacionesPerfilesContratanteCompleto3_20200524_194539_1.atom
+2024-11-03 11:54:25.479 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Ratio de archivos procesados: 99.99999999999997 %
+2024-11-03 11:54:25.580 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Creando el fichero ./output/2018/05/05_2018.xlsx
+2024-11-03 11:54:25.580 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - N�mero de ficheros procesados 22
+2024-11-03 11:54:25.580 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - N�mero de elementos entry existentes: 10934
+2024-11-03 11:54:25.580 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Licitaciones insertadas en el fichero: 9266
+2024-11-03 11:54:25.580 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Comienzo de escritura del fichero de salida
+2024-11-03 11:54:26.042 [main] INFO  es.age.dgpe.placsp.risp.parser.view.ParserController - Fin del proceso de generaci�n del fichero

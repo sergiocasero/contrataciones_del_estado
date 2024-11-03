@@ -9,3 +9,4 @@ build/*
 .gradle/*
 xlsx_extractor/venv/*
 xlsx_extractor/licitaciones.db
+local.properties
