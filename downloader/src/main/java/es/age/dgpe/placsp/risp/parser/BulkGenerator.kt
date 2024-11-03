@@ -11,6 +11,11 @@ import java.net.URL
 import java.util.logging.Logger
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 
 private val logger = Logger.getLogger(ParserController::class.java.name)
@@ -101,6 +106,21 @@ fun downloadContractZip(month: String, year: String): String {
 
 fun downloadAndUnzipZipFile(zipUrl: String, destinationDirectory: File) {
     try {
+        // Disable SSL certificate validation
+        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
+            override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {}
+            override fun checkServerTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {}
+            override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> = arrayOf()
+        })
+
+        val sslContext = SSLContext.getInstance("SSL")
+        sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+        HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.socketFactory)
+
+        // Create an all-trusting host name verifier
+        val allHostsValid = HostnameVerifier { _, _ -> true }
+        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid)
+
         // Conectar al servidor y descargar el archivo ZIP
         val url = URL(zipUrl)
         val connection = url.openConnection() as HttpURLConnection
