@@ -1,90 +1,108 @@
 import os
-import sqlite3
+import mysql.connector
 import pandas as pd
+from dotenv import load_dotenv
 
-# Crear la conexión a la base de datos SQLite y el cursor
-def crear_tabla_licitaciones(db_name="licitaciones.db"):
-    conn = sqlite3.connect(db_name)
+# Load environment variables
+load_dotenv()
+
+# Create database connection and cursor
+def crear_tabla_licitaciones():
+    conn = mysql.connector.connect(
+        host=os.getenv('database_url'),
+        user=os.getenv('database_user'),
+        password=os.getenv('database_password'),
+        database=os.getenv('database_name'),
+        charset='utf8mb4',
+        collation='utf8mb4_unicode_ci'
+    )
     cursor = conn.cursor()
 
-    # Crear la tabla licitaciones
+    # Create licitaciones table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS licitaciones (
-            Identificador TEXT,
-            Link_licitacion TEXT,
-            Fecha_actualizacion TEXT,
-            Vigente_Anulada_Archivada TEXT,
-            Primera_publicacion TEXT,
-            Estado TEXT,
-            Numero_expediente TEXT,
-            Objeto_contrato TEXT,
-            Valor_estimado_contrato REAL,
-            Presupuesto_base_sin_impuestos REAL,
-            Presupuesto_base_con_impuestos REAL,
-            CPV TEXT,
-            Tipo_contrato TEXT,
-            Lugar_ejecucion TEXT,
-            Organo_Contratacion TEXT,
-            ID_OC_en_PLACSP TEXT,
-            NIF_OC TEXT,
-            DIR3 TEXT,
-            Enlace_perfil_contratante_OC TEXT,
-            Tipo_administracion TEXT,
-            Codigo_postal TEXT,
-            Tipo_procedimiento TEXT,
-            Sistema_contratacion TEXT,
-            Tramitacion TEXT,
-            Forma_presentacion_oferta TEXT,
-            Fecha_presentacion_ofertas TEXT,
-            Fecha_presentacion_solicitudes TEXT,
-            Directiva_aplicacion TEXT,
-            Financiacion_Europea_y_fuente TEXT,
-            Descripcion_financiacion_europea TEXT,
-            Subcontratacion_permitida TEXT,
-            Subcontratacion_permitida_porcentaje REAL,
-            Numero_expediente_lote TEXT,
-            Objeto_licitacion_lote TEXT,
-            Presupuesto_base_con_impuestos_lote REAL,
-            Presupuesto_base_sin_impuestos_lote REAL,
-            CPV_licitacion_lote TEXT,
-            Lugar_ejecucion_lote TEXT,
-            Resultado_licitacion_lote TEXT,
-            Fecha_acuerdo_lote TEXT,
-            Numero_ofertas_recibidas_lote INTEGER,
-            Precio_oferta_mas_baja_lote REAL,
-            Precio_oferta_mas_alta_lote REAL,
-            Ofertas_excluidas_anormalmente_bajas TEXT,
-            Numero_contrato_lote TEXT,
-            Fecha_formalizacion_contrato_lote TEXT,
-            Fecha_entrada_en_vigor_contrato_lote TEXT,
-            Adjudicatario_lote TEXT,
-            Tipo_identificador_adjudicatario_lote TEXT,
-            Identificador_Adjudicatario_lote TEXT,
-            Adjudicatario_es_o_no_PYME TEXT,
-            Importe_adjudicacion_sin_impuestos_lote REAL,
-            Importe_adjudicacion_con_impuestos_lote REAL
-        )
+            Identificador VARCHAR(255) COLLATE utf8mb4_unicode_ci PRIMARY KEY,
+            Link_licitacion TEXT COLLATE utf8mb4_unicode_ci,
+            Fecha_actualizacion VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Vigente_Anulada_Archivada VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Primera_publicacion VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Estado VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Numero_expediente VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Objeto_contrato TEXT COLLATE utf8mb4_unicode_ci,
+            Valor_estimado_contrato DECIMAL(15,2),
+            Presupuesto_base_sin_impuestos DECIMAL(15,2),
+            Presupuesto_base_con_impuestos DECIMAL(15,2),
+            CPV TEXT COLLATE utf8mb4_unicode_ci,
+            Tipo_contrato VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Lugar_ejecucion VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Organo_Contratacion TEXT COLLATE utf8mb4_unicode_ci,
+            ID_OC_en_PLACSP VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            NIF_OC VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            DIR3 VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Enlace_perfil_contratante_OC TEXT COLLATE utf8mb4_unicode_ci,
+            Tipo_administracion VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Codigo_postal VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Tipo_procedimiento VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Sistema_contratacion VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Tramitacion VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Forma_presentacion_oferta VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Fecha_presentacion_ofertas VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Fecha_presentacion_solicitudes VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Directiva_aplicacion VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Financiacion_Europea_y_fuente VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Descripcion_financiacion_europea TEXT COLLATE utf8mb4_unicode_ci,
+            Subcontratacion_permitida VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Subcontratacion_permitida_porcentaje DECIMAL(5,2),
+            Numero_expediente_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Objeto_licitacion_lote TEXT COLLATE utf8mb4_unicode_ci,
+            Presupuesto_base_con_impuestos_lote DECIMAL(15,2),
+            Presupuesto_base_sin_impuestos_lote DECIMAL(15,2),
+            CPV_licitacion_lote TEXT COLLATE utf8mb4_unicode_ci,
+            Lugar_ejecucion_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Resultado_licitacion_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Fecha_acuerdo_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Numero_ofertas_recibidas_lote INT,
+            Precio_oferta_mas_baja_lote DECIMAL(15,2),
+            Precio_oferta_mas_alta_lote DECIMAL(15,2),
+            Ofertas_excluidas_anormalmente_bajas VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Numero_contrato_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Fecha_formalizacion_contrato_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Fecha_entrada_en_vigor_contrato_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Adjudicatario_lote TEXT COLLATE utf8mb4_unicode_ci,
+            Tipo_identificador_adjudicatario_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Identificador_Adjudicatario_lote VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Adjudicatario_es_o_no_PYME VARCHAR(255) COLLATE utf8mb4_unicode_ci,
+            Importe_adjudicacion_sin_impuestos_lote DECIMAL(15,2),
+            Importe_adjudicacion_con_impuestos_lote DECIMAL(15,2)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     ''')
 
     conn.commit()
     conn.close()
 
-# Función para insertar masivamente desde los ficheros .xlsx
-def insertar_datos_desde_xlsx(carpeta, db_name="licitaciones.db"):
-    conn = sqlite3.connect(db_name)
-    cursor = conn.cursor()
+# Function to bulk insert from .xlsx files
+def insertar_datos_desde_xlsx(carpeta):
 
-    # Recorrer la carpeta y subcarpetas
+    # Walk through folder and subfolders
     for subdir, dirs, files in os.walk(carpeta):
         for file in files:
             if file.endswith('.xlsx'):
+                conn = mysql.connector.connect(
+                    host=os.getenv('database_url'),
+                    user=os.getenv('database_user'),
+                    password=os.getenv('database_password'),
+                    database=os.getenv('database_name'),
+                    charset='utf8mb4',
+                    collation='utf8mb4_unicode_ci'
+                )
+                cursor = conn.cursor()
                 file_path = os.path.join(subdir, file)
                 print(f"Procesando archivo: {file_path}")
 
-                # Leer el archivo Excel
+                # Read Excel file
                 df = pd.read_excel(file_path, sheet_name='Licitaciones')
 
-                # Renombrar columnas para que coincidan con la tabla de SQLite
+                # Rename columns to match MySQL table
                 df.columns = [
                     'Identificador',
                     'Link_licitacion',
@@ -142,11 +160,25 @@ def insertar_datos_desde_xlsx(carpeta, db_name="licitaciones.db"):
                     'Importe_adjudicacion_con_impuestos_lote'
                 ]
 
-                # Insertar datos fila por fila en la base de datos
-                df.to_sql('licitaciones', conn, if_exists='append', index=False)
+                # Replace NaN values with None before inserting
+                df = df.replace({pd.NA: None, float('nan'): None})
 
-    conn.commit()
-    conn.close()
+                # Remove duplicate Numero_expediente column
+                df = df.loc[:,~df.columns.duplicated()]
+
+                # Trim Organo_Contratacion to maximum TEXT length (65,535 characters)
+                df['Organo_Contratacion'] = df['Organo_Contratacion'].str.slice(0, 65534)
+
+                # Insert data row by row into database
+                for _, row in df.iterrows():
+                    placeholders = ', '.join(['%s'] * len(df.columns))
+                    columns = ', '.join(df.columns)
+                    sql = f"INSERT IGNORE INTO licitaciones ({columns}) VALUES ({placeholders})"
+                    cursor.execute(sql, tuple(row))
+
+                conn.commit()
+                conn.close()
+
 
 crear_tabla_licitaciones()
 insertar_datos_desde_xlsx('../downloader/output')
