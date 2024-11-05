@@ -68,54 +68,77 @@ function displayResults(data) {
         const card = document.createElement('div');
         card.className = 'contract-card';
 
+        const expediente = document.createElement('p');
+        expediente.className = 'expediente';
+        expediente.textContent = `Expediente: ${item.Numero_expediente}`;
+        card.appendChild(expediente);
+
         const linkButton = document.createElement('a');
         linkButton.href = item.Link_licitacion;
         linkButton.target = '_blank';
         linkButton.className = 'link-button';
         linkButton.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24"><path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/></svg>';
+        card.appendChild(linkButton);
 
         const title = document.createElement('h3');
-        title.textContent = item.Objeto_licitacion_lote;
+        title.textContent = item.Objeto_contrato;
+        card.appendChild(title);
+
+        if (item.Objeto_licitacion_lote && item.Objeto_licitacion_lote !== item.Objeto_contrato) {
+            const subtitle = document.createElement('h4');
+            subtitle.textContent = item.Objeto_licitacion_lote;
+            card.appendChild(subtitle);
+        }
 
         const date = document.createElement('p');
         date.className = 'date';
         date.textContent = `Fecha: ${item.Fecha_actualizacion}`;
+        card.appendChild(date);
 
         const organ = document.createElement('p');
         organ.className = 'organ';
         organ.textContent = `Órgano: ${item.Organo_Contratacion}`;
+        card.appendChild(organ);
 
         const nifOC = document.createElement('p');
         nifOC.className = 'nif-oc';
         nifOC.textContent = `NIF Órgano: ${item.NIF_OC}`;
-
-        const amount = document.createElement('p');
-        amount.className = 'amount';
-        amount.textContent = `Importe: ${item.Importe_adjudicacion_sin_impuestos_lote ? item.Importe_adjudicacion_sin_impuestos_lote.toLocaleString('es-ES', {style: 'currency', currency: 'EUR'}) : '-€'}`;
+        card.appendChild(nifOC);
 
         const baseAmount = document.createElement('p');
         baseAmount.className = 'amount';
-        baseAmount.textContent = `Presupuesto base sin impuestos: ${item.Presupuesto_base_sin_impuestos_lote ? item.Presupuesto_base_sin_impuestos_lote.toLocaleString('es-ES', {style: 'currency', currency: 'EUR'}) : '-€'}`;
-        
-        
-        const contractor = document.createElement('p');
-        contractor.className = 'contractor';
-        contractor.textContent = `Adjudicatario: ${item.Adjudicatario_lote}`;
-
-        const contractorId = document.createElement('p');
-        contractorId.className = 'contractor-id';
-        contractorId.textContent = `NIF Adjudicatario: ${item.Identificador_Adjudicatario_lote}`;
-
-
-        card.appendChild(linkButton);
-        card.appendChild(title);
-        card.appendChild(date);
-        card.appendChild(organ);
-        card.appendChild(nifOC);
-        card.appendChild(amount);
+        baseAmount.textContent = `Presupuesto base sin impuestos: ${item.Presupuesto_base_sin_impuestos ? item.Presupuesto_base_sin_impuestos.toLocaleString('es-ES', {style: 'currency', currency: 'EUR'}) : '-€'}`;
         card.appendChild(baseAmount);
-        card.appendChild(contractor);
-        card.appendChild(contractorId);
+
+        if (item.Valor_estimado_contrato !== item.Presupuesto_base_sin_impuestos) {
+            const estimatedValue = document.createElement('p');
+            estimatedValue.className = 'amount';
+            estimatedValue.textContent = `Valor estimado: ${item.Valor_estimado_contrato ? item.Valor_estimado_contrato.toLocaleString('es-ES', {style: 'currency', currency: 'EUR'}) : '-€'}`;
+            card.appendChild(estimatedValue);
+        }
+
+        if (item.Importe_adjudicacion_sin_impuestos_lote) {
+            const amount = document.createElement('p');
+            amount.className = 'amount';
+            amount.textContent = `Importe: ${item.Importe_adjudicacion_sin_impuestos_lote.toLocaleString('es-ES', {style: 'currency', currency: 'EUR'})}`;
+            card.appendChild(amount);
+        }
+
+
+        if (item.Adjudicatario_lote) {
+            const contractor = document.createElement('p');
+            contractor.className = 'contractor';
+            contractor.textContent = `Adjudicatario: ${item.Adjudicatario_lote}`;
+            card.appendChild(contractor);
+        }
+
+        if (item.Identificador_Adjudicatario_lote) {
+            const contractorId = document.createElement('p');
+            contractorId.className = 'contractor-id';
+            contractorId.textContent = `NIF Adjudicatario: ${item.Identificador_Adjudicatario_lote}`;
+            card.appendChild(contractorId);
+        }
+
 
         resultsDiv.appendChild(card);
     });
